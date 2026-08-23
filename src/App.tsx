@@ -17,8 +17,18 @@ export default function App() {
   const submit = (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); track('early_access_submitted'); setSent(true) }
   const toggleVideo = () => { const video = videoRef.current; if (!video) return; if (video.paused) void video.play(); else video.pause() }
   return <main>
-    <section className="hero" id="top"><div className="hero-fallback" /><video ref={videoRef} className="hero-video" autoPlay muted loop playsInline poster={heroPoster} onPlay={() => setVideoPaused(false)} onPause={() => setVideoPaused(true)}><source src={heroVideo} type="video/mp4" /></video>
-      <nav className="nav" aria-label="Main navigation"><a className="wordmark" href="#top"><img src={logo} alt="Keruvva" /></a><button className="menu-toggle" type="button" aria-expanded={menu} onClick={() => setMenu(!menu)}>{menu ? 'CLOSE ×' : 'MENU ＋'}</button><div className={`nav-links ${menu ? 'open' : ''}`}><a href="#platform" onClick={() => setMenu(false)}>Platform</a><a href="#technology" onClick={() => setMenu(false)}>Technology</a><a href="#applications" onClick={() => setMenu(false)}>Applications</a><a href="#vision" onClick={() => setMenu(false)}>Vision</a><a href="#about" onClick={() => setMenu(false)}>About</a><button className="nav-cta" type="button" onClick={openAccess}>Get early access ↗</button></div></nav>
+    <section className="hero" id="top">
+      <div className="hero-fallback" />
+      <video ref={videoRef} className="hero-video" autoPlay muted loop playsInline poster={heroPoster} onPlay={() => setVideoPaused(false)} onPause={() => setVideoPaused(true)}>
+        <source src={heroVideo} type="video/mp4" />
+      </video>
+      <nav className="nav" aria-label="Main navigation">
+        <a className="wordmark" href="#top">
+          <img src={logo} alt="Keruvva" />
+        </a>
+      <button className="menu-toggle" type="button" aria-expanded={menu} onClick={() => setMenu(!menu)}>{menu ? 'CLOSE ×' : 'MENU ＋'}</button>
+      <div className={`nav-links ${menu ? 'open' : ''}`}>
+        <a href="#platform" onClick={() => setMenu(false)}>Platform</a><a href="#technology" onClick={() => setMenu(false)}>Technology</a><a href="#applications" onClick={() => setMenu(false)}>Applications</a><a href="#vision" onClick={() => setMenu(false)}>Vision</a><a href="#about" onClick={() => setMenu(false)}>About</a><button className="nav-cta" type="button" onClick={openAccess}>Get early access ↗</button></div></nav>
       <div className="hero-content wrap"><p className="eyebrow">AI-POWERED PARTICIPATION INFRASTRUCTURE</p><h1>The digital layer<br />for <em>real-world</em> action.</h1><p className="hero-sub">Keruvva connects physical environments, digital twins, AI and human participation into one intelligent infrastructure layer.</p><button className="button button-primary" type="button" onClick={openAccess}>Get early access ↗</button></div><div className="hero-status"><span className="pulse" /> DIGITAL TWIN <strong>CONNECTED</strong><small>31.2084° N / 29.9092° E</small></div><button className="video-toggle" type="button" onClick={toggleVideo} aria-label={videoPaused ? 'Play hero video' : 'Pause hero video'} aria-pressed={videoPaused}>{videoPaused ? '▶' : 'Ⅱ'}<span>{videoPaused ? 'PLAY' : 'PAUSE'}</span></button><div className="scroll-cue"><span /> SCROLL TO EXPLORE</div>
     </section>
     <section className="section architecture" id="platform"><div className="wrap"><div className="section-intro"><p className="eyebrow">01 / THE SYSTEM</p><h2>The physical world is full of signals.<br /><span>Keruvva makes them operable.</span></h2><p>From a place, to its digital representation, to coordinated action. Keruvva is being built to connect the layers that turn intent into outcomes.</p></div><div className="system-stack">{['CITY / CAMPUS / INFRASTRUCTURE', 'DIGITAL TWIN', 'AI INTELLIGENCE', 'PARTICIPATION', 'VERIFICATION', 'ACTION'].map((item, i) => <div className="system-node" key={item}><span>0{i + 1}</span><b>{item}</b>{i < 5 && <i>↓</i>}</div>)}</div></div></section>
