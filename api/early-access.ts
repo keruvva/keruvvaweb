@@ -26,7 +26,7 @@ export default async function handler(request: VercelRequest, response: VercelRe
   const organizationRole = typeof request.body?.organizationRole === 'string' ? request.body.organizationRole.trim() : ''
   if (!emailPattern.test(email) || email.length > 254 || organizationRole.length > 200) return response.status(400).json({ error: 'Invalid form data' })
 
-  const supabaseUrl = process.env.SUPABASE_URL
+  const supabaseUrl = process.env.SUPABASE_URL?.replace(/\/+$/, '')
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
   if (!supabaseUrl || !serviceRoleKey) return response.status(503).json({ error: 'Form service is not configured' })
 
