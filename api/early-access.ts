@@ -35,6 +35,13 @@ export default async function handler(request: VercelRequest, response: VercelRe
     headers: { apikey: serviceRoleKey, Authorization: `Bearer ${serviceRoleKey}`, 'Content-Type': 'application/json', Prefer: 'resolution=ignore-duplicates,return=minimal' },
     body: JSON.stringify({ email, organization_role: organizationRole || null })
   }).catch(() => null)
-  if (!result?.ok) return response.status(502).json({ error: 'Could not save form data' })
+  if (!result?.ok) {
+    const details = await result?.text().catch(() => '') ?? ''
+    let message = 'Could not save form data'
+    if (details.includes('early_access_submissions')) message = 'The early_access_submissions table was not found. Run supabase/early-access.sql first.'
+    else if (result?.status === 401 || result?.status === 403) message = 'Supabase rejected the service key. Check SUPABASE_SERVICE_ROLE_KEY in Vercel.'
+    else if (result) message = `Supabase rejected the request (${result.status}). Check the table schema and Supabase URL.`
+    return response.status(502).json({ error: message })
+  }
   return response.status(200).json({ status: 'received' })
 }
