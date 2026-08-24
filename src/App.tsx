@@ -32,7 +32,11 @@ export default function App() {
     const form = new FormData(event.currentTarget)
     const response = await fetch('/api/early-access', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: form.get('email'), organizationRole: form.get('organizationRole') }) }).catch(() => null)
     setSubmitting(false)
-    if (!response?.ok) { setFormError('We could not save your request. Please try again.'); return }
+    if (!response?.ok) {
+      const result = await response?.json().catch(() => null)
+      setFormError(result?.error ?? 'We could not save your request. Please try again.')
+      return
+    }
     track('early_access_submitted'); setSent(true)
   }
   const toggleVideo = () => { const video = videoRef.current; if (!video) return; if (video.paused) void video.play(); else video.pause() }
