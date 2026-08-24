@@ -5,16 +5,36 @@ import logo from './assets/keruvva-logo.png'
 import heroVideo from './assets/keruvva-hero.mp4'
 import heroPoster from './assets/keruvva-hero-poster.webp'
 
-const stages = [['01', 'MAP', 'Represent physical environments digitally.'], ['02', 'UNDERSTAND', 'Combine spatial, project and contextual information.'], ['03', 'COORDINATE', 'Connect institutions, opportunities and participants.'], ['04', 'VERIFY', 'Capture evidence that real-world actions occurred.'], ['05', 'MEASURE', 'Turn participation into measurable outcomes.']]
-const applications = [['01', 'URBAN DEVELOPMENT', 'Coordinate participation around physical development projects.', 'Connected planning and real-world activity.'], ['02', 'INFRASTRUCTURE', 'Bring projects, places, evidence and stakeholders into one view.', 'Greater visibility across complex delivery.'], ['03', 'SUSTAINABILITY', 'Make environmental action legible, participatory and measurable.', 'A clearer path from intent to impact.'], ['04', 'GOVERNMENT', 'Create an operational layer for public initiatives and feedback.', 'More context around public action.'], ['05', 'ENTERPRISE', 'Coordinate place-based programmes across distributed teams.', 'Shared intelligence for institutional work.'], ['06', 'CAMPUSES & DISTRICTS', 'Connect the people, assets and projects that shape a place.', 'A more responsive operating environment.']]
+const stages = [
+  ['01', 'MAP', 'Represent physical environments digitally.'],
+  ['02', 'UNDERSTAND', 'Combine spatial, project and contextual information.'],
+  ['03', 'COORDINATE', 'Connect institutions, opportunities and participants.'],
+  ['04', 'VERIFY', 'Capture evidence that real-world actions occurred.'],
+  ['05', 'MEASURE', 'Turn participation into measurable outcomes.']
+]
+const applications = [
+  ['01', 'URBAN DEVELOPMENT', 'Coordinate participation around physical development projects.', 'Connected planning and real-world activity.'],
+  ['02', 'INFRASTRUCTURE', 'Bring projects, places, evidence and stakeholders into one view.', 'Greater visibility across complex delivery.'],
+  ['03', 'SUSTAINABILITY', 'Make environmental action legible, participatory and measurable.', 'A clearer path from intent to impact.'],
+  ['04', 'GOVERNMENT', 'Create an operational layer for public initiatives and feedback.', 'More context around public action.'],
+  ['05', 'ENTERPRISE', 'Coordinate place-based programmes across distributed teams.', 'Shared intelligence for institutional work.'],
+  ['06', 'CAMPUSES & DISTRICTS', 'Connect the people, assets and projects that shape a place.', 'A more responsive operating environment.']
+]
 const layers = ['BUILDING', 'PROJECT', 'INFRASTRUCTURE', 'PEOPLE', 'TASK', 'DATA', 'IMPACT']
 function track(event: string) { window.dispatchEvent(new CustomEvent('keruvva:analytics', { detail: { event } })) }
 
 export default function App() {
-  const [menu, setMenu] = useState(false); const [modal, setModal] = useState(false); const [sent, setSent] = useState(false); const [layer, setLayer] = useState('PROJECT'); const [videoPaused, setVideoPaused] = useState(false)
+  const [menu, setMenu] = useState(false); const [modal, setModal] = useState(false); const [sent, setSent] = useState(false); const [submitting, setSubmitting] = useState(false); const [formError, setFormError] = useState(''); const [layer, setLayer] = useState('PROJECT'); const [videoPaused, setVideoPaused] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
-  const openAccess = () => { track('early_access_started'); setModal(true); setMenu(false) }
-  const submit = (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); track('early_access_submitted'); setSent(true) }
+  const openAccess = () => { track('early_access_started'); setModal(true); setSent(false); setFormError(''); setMenu(false) }
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); setSubmitting(true); setFormError('')
+    const form = new FormData(event.currentTarget)
+    const response = await fetch('/api/early-access', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: form.get('email'), organizationRole: form.get('organizationRole') }) }).catch(() => null)
+    setSubmitting(false)
+    if (!response?.ok) { setFormError('We could not save your request. Please try again.'); return }
+    track('early_access_submitted'); setSent(true)
+  }
   const toggleVideo = () => { const video = videoRef.current; if (!video) return; if (video.paused) void video.play(); else video.pause() }
   return <main>
     <section className="hero" id="top">
@@ -29,7 +49,15 @@ export default function App() {
       <button className="menu-toggle" type="button" aria-expanded={menu} onClick={() => setMenu(!menu)}>{menu ? 'CLOSE ×' : 'MENU ＋'}</button>
       <div className={`nav-links ${menu ? 'open' : ''}`}>
         <a href="#platform" onClick={() => setMenu(false)}>Platform</a><a href="#technology" onClick={() => setMenu(false)}>Technology</a><a href="#applications" onClick={() => setMenu(false)}>Applications</a><a href="#vision" onClick={() => setMenu(false)}>Vision</a><a href="#about" onClick={() => setMenu(false)}>About</a><button className="nav-cta" type="button" onClick={openAccess}>Get early access ↗</button></div></nav>
-      <div className="hero-content wrap"><p className="eyebrow">AI-POWERED PARTICIPATION INFRASTRUCTURE</p><h1>The digital layer<br />for <em>real-world</em> action.</h1><p className="hero-sub">Keruvva connects physical environments, digital twins, AI and human participation into one intelligent infrastructure layer.</p><button className="button button-primary" type="button" onClick={openAccess}>Get early access ↗</button></div><div className="hero-status"><span className="pulse" /> DIGITAL TWIN <strong>CONNECTED</strong><small>31.2084° N / 29.9092° E</small></div><button className="video-toggle" type="button" onClick={toggleVideo} aria-label={videoPaused ? 'Play hero video' : 'Pause hero video'} aria-pressed={videoPaused}>{videoPaused ? '▶' : 'Ⅱ'}<span>{videoPaused ? 'PLAY' : 'PAUSE'}</span></button><div className="scroll-cue"><span /> SCROLL TO EXPLORE</div>
+      <div className="hero-content wrap">
+        <p className="eyebrow">AI-POWERED PARTICIPATION INFRASTRUCTURE</p>
+        <h1>The digital layer<br />for <em>real-world</em> action.</h1>
+        <p className="hero-sub">Keruvva connects physical environments, digital twins, AI and human participation into one intelligent infrastructure layer.</p>
+        <button className="button button-primary" type="button" onClick={openAccess}>Get early access ↗</button>
+      </div>
+      <div className="hero-status">
+        <span className="pulse" /> DIGITAL TWIN <strong>CONNECTED</strong><small>31.2084° N / 29.9092° E</small></div><button className="video-toggle" type="button" onClick={toggleVideo} aria-label={videoPaused ? 'Play hero video' : 'Pause hero video'} aria-pressed={videoPaused}>{videoPaused ? '▶' : 'Ⅱ'}<span>{videoPaused ? 'PLAY' : 'PAUSE'}</span></button>
+      <div className="scroll-cue"><span /> SCROLL TO EXPLORE</div>
     </section>
     <section className="section architecture" id="platform"><div className="wrap"><div className="section-intro"><p className="eyebrow">01 / THE SYSTEM</p><h2>The physical world is full of signals.<br /><span>Keruvva makes them operable.</span></h2><p>From a place, to its digital representation, to coordinated action. Keruvva is being built to connect the layers that turn intent into outcomes.</p></div><div className="system-stack">{['CITY / CAMPUS / INFRASTRUCTURE', 'DIGITAL TWIN', 'AI INTELLIGENCE', 'PARTICIPATION', 'VERIFICATION', 'ACTION'].map((item, i) => <div className="system-node" key={item}><span>0{i + 1}</span><b>{item}</b>{i < 5 && <i>↓</i>}</div>)}</div></div></section>
     <section className="section gap-section" id="vision"><div className="wrap"><p className="eyebrow">02 / THE PARTICIPATION GAP</p><div className="gap-layout"><h2>Intent <span>→</span> coordination<br /><span>→</span> action <span>→</span> verification<br /><span>→</span> impact</h2><div><p>Institutions can define projects. People can express interest. Data can describe environments. AI can generate recommendations.</p><p>But these systems often remain disconnected from the physical execution layer.</p><strong>Keruvva is being built to close that gap.</strong></div></div></div></section>
@@ -44,6 +72,6 @@ export default function App() {
     <section className="section founder"><div className="wrap founder-layout"><div className="founder-mark"><img src={logo} alt="Keruvva" /></div><div><p className="eyebrow">11 / THE BUILDER</p><h2>Goodness<br /><em>Ononogbu</em></h2><p className="role">Founder, Keruvva</p><p className="founder-copy">Building at the intersection of AI, digital twins, urban innovation, sustainability and systems thinking.</p></div></div></section>
     <section className="section early-access" id="early-access"><div className="wrap"><p className="eyebrow">12 / EARLY ACCESS</p><h2>The next layer of the physical world<br /><em>is being built.</em></h2><p>Keruvva is currently being developed with early users, institutions, technology collaborators and people who want to explore what participation infrastructure can become.</p><button className="button button-light" type="button" onClick={openAccess}>Join the early network ↗</button><div className="early-foot"><span>KERUVVA / 2026</span><span>AI-POWERED PARTICIPATION INFRASTRUCTURE</span></div></div></section>
     <footer className="site-footer"><div className="wrap footer-content"><a className="footer-brand" href="#top"><img src={logo} alt="Keruvva" /></a><p>AI-POWERED PARTICIPATION INFRASTRUCTURE</p><small>KERUVVA © 2026</small></div></footer>
-    {modal && <div className="modal-backdrop" onMouseDown={e => e.target === e.currentTarget && setModal(false)}><div className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button className="modal-close" type="button" onClick={() => setModal(false)} aria-label="Close dialog">×</button>{sent ? <div className="success"><span>✓</span><p className="eyebrow">EARLY NETWORK</p><h2>You're on the<br /><em>early network.</em></h2><p>This is a development-mode confirmation. Connect the form to your preferred backend before launch.</p><button className="button button-primary" type="button" onClick={() => { track('referral_clicked'); navigator.clipboard?.writeText(window.location.href) }}>Invite someone ↗</button></div> : <form onSubmit={submit}><p className="eyebrow">REQUEST ACCESS</p><h2 id="modal-title">Join the<br /><em>early network.</em></h2><p>Get first access to the Keruvva platform, pilots and early product opportunities.</p><label>Email<input type="email" required placeholder="you@organisation.com" /></label><label>Organization / role <small>OPTIONAL</small><input type="text" placeholder="Your context" /></label><button className="button button-primary" type="submit">Request early access ↗</button><small className="form-note">Development mode: submissions are not stored yet.</small></form>}</div></div>}
+    {modal && <div className="modal-backdrop" onMouseDown={e => e.target === e.currentTarget && setModal(false)}><div className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button className="modal-close" type="button" onClick={() => setModal(false)} aria-label="Close dialog">×</button>{sent ? <div className="success"><span>✓</span><p className="eyebrow">EARLY NETWORK</p><h2>You're on the<br /><em>early network.</em></h2><p>Your request has been received. We will be in touch with the next steps.</p><button className="button button-primary" type="button" onClick={() => { track('referral_clicked'); navigator.clipboard?.writeText(window.location.href) }}>Invite someone ↗</button></div> : <form onSubmit={submit}><p className="eyebrow">REQUEST ACCESS</p><h2 id="modal-title">Join the<br /><em>early network.</em></h2><p>Get first access to the Keruvva platform, pilots and early product opportunities.</p><label>Email<input name="email" type="email" required placeholder="you@organisation.com" /></label><label>Organization / role <small>OPTIONAL</small><input name="organizationRole" type="text" placeholder="Your context" /></label><button className="button button-primary" type="submit" disabled={submitting}>{submitting ? 'Sending...' : 'Request early access ↗'}</button>{formError && <small className="form-note form-error" role="alert">{formError}</small>}</form>}</div></div>}
   </main>
 }

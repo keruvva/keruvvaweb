@@ -21,7 +21,7 @@ Place replacement files in `src/assets/`: `keruvva-logo.png`, `keruvva-hero.mp4`
 
 ## Future integrations
 
-The early-access form currently shows a development-mode success state and does not store submissions. Connect the `submit` handler in `src/App.tsx` to Supabase, ConvertKit, Mailchimp, HubSpot, or a custom API before launch. Analytics events are dispatched as `keruvva:analytics` browser events by `track()` and can be connected to a provider later. Add Stripe only when billing is configured.
+The early-access form posts to the Vercel function in `api/early-access.ts`, which stores submissions in Supabase. Create the table with `supabase/early-access.sql`, then configure `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` as Vercel environment variables. Keep the service-role key server-side and never expose it through `VITE_` variables. Analytics events are dispatched as `keruvva:analytics` browser events by `track()` and can be connected to a provider later. Add Stripe only when billing is configured.
 
 ## Deployment
 
