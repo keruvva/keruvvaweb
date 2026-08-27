@@ -30,11 +30,18 @@ export default async function handler(request: VercelRequest, response: VercelRe
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
   if (!supabaseUrl || !serviceRoleKey) return response.status(503).json({ error: 'Form service is not configured' })
 
+  const headers = { apikey: serviceRoleKey, Authorization: `Bearer ${serviceRoleKey}` }
+  const existing = await fetch(`${supabaseUrl}/rest/v1/early_access_submissions?select=id&email=eq.${encodeURIComponent(email)}&limit=1`, { headers }).catch(() => null)
+  if (!existing?.ok) return response.status(502).json({ error: 'Could not check registration status' })
+  const existingRows = await existing.json() as unknown
+  if (Array.isArray(existingRows) && existingRows.length > 0) return response.status(409).json({ status: 'duplicate', error: 'You have already registered.' })
+
   const result = await fetch(`${supabaseUrl}/rest/v1/early_access_submissions`, {
     method: 'POST',
-    headers: { apikey: serviceRoleKey, Authorization: `Bearer ${serviceRoleKey}`, 'Content-Type': 'application/json', Prefer: 'resolution=ignore-duplicates,return=minimal' },
+    headers: { ...headers, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
     body: JSON.stringify({ email, organization_role: organizationRole || null })
   }).catch(() => null)
+  if (result?.status === 409) return response.status(409).json({ status: 'duplicate', error: 'You have already registered.' })
   if (!result?.ok) {
     const details = await result?.text().catch(() => '') ?? ''
     let message = 'Could not save form data'
