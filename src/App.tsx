@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import type { FormEvent, MouseEvent } from 'react'
 import './App.css'
 import logo from './assets/keruvva-logo.png'
@@ -24,8 +24,7 @@ const layers = ['BUILDING', 'PROJECT', 'INFRASTRUCTURE', 'PEOPLE', 'TASK', 'DATA
 function track(event: string) { window.dispatchEvent(new CustomEvent('keruvva:analytics', { detail: { event } })) }
 
 export default function App() {
-  const [menu, setMenu] = useState(false); const [modal, setModal] = useState(false); const [sent, setSent] = useState(false); const [duplicate, setDuplicate] = useState(false); const [submitting, setSubmitting] = useState(false); const [formError, setFormError] = useState(''); const [inviteCopied, setInviteCopied] = useState(false); const [layer, setLayer] = useState('PROJECT'); const [videoPaused, setVideoPaused] = useState(false)
-  const videoRef = useRef<HTMLVideoElement>(null)
+  const [menu, setMenu] = useState(false); const [modal, setModal] = useState(false); const [sent, setSent] = useState(false); const [duplicate, setDuplicate] = useState(false); const [submitting, setSubmitting] = useState(false); const [formError, setFormError] = useState(''); const [inviteCopied, setInviteCopied] = useState(false); const [layer, setLayer] = useState('PROJECT')
   const openAccess = () => { track('early_access_started'); setModal(true); setSent(false); setDuplicate(false); setFormError(''); setInviteCopied(false); setMenu(false) }
   const scrollToSection = (event: MouseEvent<HTMLAnchorElement>, sectionId: string) => {
     event.preventDefault()
@@ -45,11 +44,10 @@ export default function App() {
     }
     track('early_access_submitted'); setSent(true)
   }
-  const toggleVideo = () => { const video = videoRef.current; if (!video) return; if (video.paused) void video.play(); else video.pause() }
   return <main>
-    <section className="hero" id="top">
+    <section className={`hero ${menu ? 'menu-open' : ''}`} id="top">
       <div className="hero-fallback" />
-      <video ref={videoRef} className="hero-video" autoPlay muted loop playsInline poster={heroPoster} onPlay={() => setVideoPaused(false)} onPause={() => setVideoPaused(true)}>
+      <video className="hero-video" autoPlay muted loop playsInline poster={heroPoster}>
         <source src={heroVideo} type="video/mp4" />
       </video>
       <nav className="nav" aria-label="Main navigation">
@@ -59,15 +57,13 @@ export default function App() {
       <button className="menu-toggle" type="button" aria-expanded={menu} onClick={() => setMenu(!menu)}>{menu ? 'CLOSE ×' : 'MENU ＋'}</button>
       <div className={`nav-links ${menu ? 'open' : ''}`}>
         <a href="#platform" onClick={event => scrollToSection(event, 'platform')}>Platform</a><a href="#technology" onClick={event => scrollToSection(event, 'technology')}>Technology</a><a href="#applications" onClick={event => scrollToSection(event, 'applications')}>Applications</a><a href="#vision" onClick={event => scrollToSection(event, 'vision')}>Vision</a><a href="#about" onClick={event => scrollToSection(event, 'about')}>About</a><button className="nav-cta" type="button" onClick={openAccess}>Get early access ↗</button></div></nav>
-      <div className="hero-content wrap">
+    </section>
+    <section className="hero-copy">
+      <div className="wrap">
         <p className="eyebrow">AI-POWERED PARTICIPATION INFRASTRUCTURE</p>
-        <h1>The digital layer<br />for <em>real-world</em> action.</h1>
-        <p className="hero-sub">Keruvva connects physical environments, digital twins, AI and human participation into one intelligent infrastructure layer.</p>
+        <h1>Build<br /><em>your</em> world!</h1>
         <button className="button button-primary" type="button" onClick={openAccess}>Get early access ↗</button>
       </div>
-      <div className="hero-status">
-        <span className="pulse" /> DIGITAL TWIN <strong>CONNECTED</strong><small>31.2084° N / 29.9092° E</small></div><button className="video-toggle" type="button" onClick={toggleVideo} aria-label={videoPaused ? 'Play hero video' : 'Pause hero video'} aria-pressed={videoPaused}>{videoPaused ? '▶' : 'Ⅱ'}<span>{videoPaused ? 'PLAY' : 'PAUSE'}</span></button>
-      <div className="scroll-cue"><span /> SCROLL TO EXPLORE</div>
     </section>
     <section className="section architecture" id="platform">
       <div className="wrap">
