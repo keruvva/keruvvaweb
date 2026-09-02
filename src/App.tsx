@@ -59,10 +59,18 @@ export default function App() {
         <a href="platform" onClick={event => scrollToSection(event, 'platform')}>Platform</a><a href="technology" onClick={event => scrollToSection(event, 'technology')}>Technology</a><a href="applications" onClick={event => scrollToSection(event, 'applications')}>Applications</a><a href="vision" onClick={event => scrollToSection(event, 'vision')}>Vision</a><a href="about" onClick={event => scrollToSection(event, 'about')}>About</a><button className="nav-cta" type="button" onClick={openAccess}>Get early access ↗</button></div></nav>
     </section>
     <section className="hero-copy">
-      <div className="wrap">
-        <p className="eyebrow">AI-POWERED PARTICIPATION INFRASTRUCTURE</p>
-        <h1>Build<br /><em>your</em> world!</h1>
-        <button className="button button-primary" type="button" onClick={openAccess}>Get early access ↗</button>
+      <div className="wrap hero-copy-layout">
+        <div className="hero-copy-content">
+          <p className="eyebrow">AI-POWERED PARTICIPATION INFRASTRUCTURE</p>
+          <h1>Build<br /><em>your</em> world!</h1>
+          <button className="button button-primary" type="button" onClick={openAccess}>Get early access ↗</button>
+        </div>
+        <div className="city-scene" aria-label="Animated city assembling block by block" role="img">
+          <div className="city-ground" />
+          <div className="city-buildings">
+            {Array.from({ length: 12 }, (_, index) => <span className={`city-block block-${index + 1}`} key={index} />)}
+          </div>
+        </div>
       </div>
     </section>
     <section className="section architecture" id="platform">
@@ -279,8 +287,6 @@ export default function App() {
         <p>Keruvva is currently being developed with early users, institutions, technology collaborators and people who want to explore what participation infrastructure can become.</p>
         <button className="button button-light" type="button" onClick={openAccess}>Join the early network ↗</button>
         <div className="early-foot">
-          <span>KERUVVA / 2026</span>
-          <span>AI-POWERED PARTICIPATION INFRASTRUCTURE</span>
         </div>
       </div>
     </section>
@@ -289,7 +295,7 @@ export default function App() {
         <a className="footer-brand" href="#top" onClick={event => scrollToSection(event, 'top')}>
           <img src={logo} alt="Keruvva" />
         </a>
-        <p>AI-POWERED PARTICIPATION INFRASTRUCTURE</p>
+        <p>BUILD YOUR WORLD!</p>
         <small>KERUVVA © 2026</small>
       </div>
     </footer>

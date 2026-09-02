@@ -78,6 +78,116 @@ main {
     border-top: 1px solid var(--line);
 }
 
+.hero-copy-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(420px, 1.1fr);
+    gap: 8%;
+    align-items: center;
+}
+
+.hero-copy-content {
+    position: relative;
+    z-index: 1;
+}
+
+.city-scene {
+    position: relative;
+    height: 390px;
+    perspective: 1100px;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.city-ground {
+    position: absolute;
+    width: 72%;
+    height: 72%;
+    left: 14%;
+    top: 15%;
+    transform: rotateX(58deg) rotateZ(45deg) translateZ(-20px);
+    transform-style: preserve-3d;
+    border: 1px solid rgba(174, 186, 194, 0.35);
+    background: linear-gradient(rgba(174, 186, 194, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(174, 186, 194, 0.1) 1px, transparent 1px);
+    background-size: 28px 28px;
+    box-shadow: 0 0 70px rgba(174, 186, 194, 0.1);
+}
+
+.city-buildings {
+    position: absolute;
+    inset: 13% 15% 12%;
+    transform-style: preserve-3d;
+}
+
+.city-block {
+    position: absolute;
+    width: 15%;
+    height: var(--building-height);
+    bottom: var(--building-bottom);
+    border: 1px solid rgba(190, 198, 202, 0.9);
+    background: linear-gradient(90deg, #4b555c, #9aa4a8 48%, #384147);
+    box-shadow: inset 10px 0 0 rgba(20, 26, 30, 0.3), inset -8px 0 0 rgba(225, 230, 229, 0.08), 0 12px 20px rgba(0, 0, 0, 0.42), 0 0 16px rgba(160, 174, 181, 0.16);
+    transform-style: preserve-3d;
+    transform: translateY(100px) rotateY(-12deg) scale(0.75);
+    opacity: 0;
+    animation: city-rise 4.8s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+
+.city-block::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: -1px;
+    width: 100%;
+    height: 12px;
+    transform: skewX(-42deg);
+    transform-origin: bottom left;
+    border: 1px solid rgba(215, 221, 219, 0.55);
+    background: linear-gradient(135deg, rgba(224, 228, 225, 0.46), rgba(105, 116, 122, 0.3));
+}
+
+.city-block::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -12px;
+    width: 12px;
+    height: 100%;
+    transform: skewY(-48deg);
+    transform-origin: left top;
+    border: 1px solid rgba(148, 160, 166, 0.65);
+    background: repeating-linear-gradient(0deg, rgba(214, 192, 145, 0.7) 0 3px, transparent 3px 10px), repeating-linear-gradient(90deg, transparent 0 7px, rgba(214, 192, 145, 0.6) 7px 10px, transparent 10px 17px), rgba(37, 45, 50, 0.98);
+    opacity: 0.7;
+}
+
+.block-1 { left: 3%; --building-height: 26%; --building-bottom: 14%; animation-delay: 0s; }
+.block-2 { left: 22%; --building-height: 43%; --building-bottom: 28%; animation-delay: 0.25s; }
+.block-3 { left: 43%; --building-height: 62%; --building-bottom: 15%; animation-delay: 0.5s; }
+.block-4 { left: 67%; --building-height: 36%; --building-bottom: 30%; animation-delay: 0.75s; }
+.block-5 { left: 12%; --building-height: 33%; --building-bottom: 3%; animation-delay: 1s; }
+.block-6 { left: 34%; --building-height: 51%; --building-bottom: 0%; animation-delay: 1.25s; }
+.block-7 { left: 56%; --building-height: 39%; --building-bottom: 1%; animation-delay: 1.5s; }
+.block-8 { left: 80%; --building-height: 27%; --building-bottom: 7%; animation-delay: 1.75s; }
+.block-9 { left: 1%; --building-height: 22%; --building-bottom: 49%; animation-delay: 2s; }
+.block-10 { left: 30%; --building-height: 30%; --building-bottom: 55%; animation-delay: 2.25s; }
+.block-11 { left: 53%; --building-height: 28%; --building-bottom: 46%; animation-delay: 2.5s; }
+.block-12 { left: 76%; --building-height: 25%; --building-bottom: 54%; animation-delay: 2.75s; }
+
+@keyframes city-rise {
+    0%, 12% {
+        opacity: 0;
+        transform: translateY(100px) rotateY(-12deg) scale(0.75);
+    }
+    28%, 76% {
+        opacity: 1;
+        transform: translateY(0) rotateY(-12deg) scale(1);
+    }
+    92%, 100% {
+        opacity: 0;
+        transform: translateY(100px) rotateY(-12deg) scale(0.75);
+    }
+}
+
 .hero-copy h1 {
     font-size: clamp(46px, 6.6vw, 90px);
     line-height: 0.97;
@@ -85,6 +195,11 @@ main {
     text-transform: uppercase;
     margin: 0 0 30px;
     font-weight: 500;
+}
+
+.wordmark img {
+    width: clamp(150px, 12vw, 220px);
+    height: auto;
 }
 
 .hero-copy h1 em {
@@ -1320,9 +1435,18 @@ h2 span {
         padding: 64px 0 80px;
     }
 
+    .hero-copy-layout {
+        display: block;
+    }
+
     .hero-copy h1 {
         font-size: clamp(34px, 9vw, 52px);
         line-height: 1;
+    }
+
+    .city-scene {
+        height: 280px;
+        margin-top: 50px;
     }
 
     .hero {
@@ -1613,6 +1737,12 @@ h2 span {
         display: none;
     }
 
+    .city-block {
+        opacity: 1;
+        animation: none;
+        transform: translateY(0) rotateY(-12deg) scale(1);
+    }
+
     .twin-building,
     .map-route {
         box-shadow: none;
@@ -1693,8 +1823,8 @@ h2 span {
 
 .mini-brand img {
     display: block;
-    width: 108px;
-    height: 30px;
+    width: 150px;
+    height: 150px;
     object-fit: contain;
     object-position: left center;
 }
