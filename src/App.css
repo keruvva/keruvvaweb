@@ -26,6 +26,11 @@ body {
     font-family: 'Manrope', 'Segoe UI', sans-serif;
 }
 
+.nav img {
+    width: 178px;
+    height: 100px;
+}
+
 button, input {
     font: inherit;
 }
@@ -1751,8 +1756,8 @@ h2 span {
 }
 
 .wordmark img {
-    width: 150px;
-    height: 38px;
+    width: 178px;
+    height: 45px;
 }
 
 .mini-brand img {
@@ -1813,8 +1818,8 @@ h2 span {
 
 @media (max-width: 800px) {
     .wordmark img {
-        width: 132px;
-        height: 34px;
+        width: 154px;
+        height: 40px;
     }
 
     .mini-brand img {
@@ -1855,7 +1860,7 @@ h2 span {
 
 @media (min-width: 1600px) {
     .wordmark img {
-        width: 190px;
-        height: 48px;
+        width: 220px;
+        height: 56px;
     }
 }

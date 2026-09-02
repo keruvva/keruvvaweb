@@ -56,7 +56,7 @@ export default function App() {
         </a>
       <button className="menu-toggle" type="button" aria-expanded={menu} onClick={() => setMenu(!menu)}>{menu ? 'CLOSE ×' : 'MENU ＋'}</button>
       <div className={`nav-links ${menu ? 'open' : ''}`}>
-        <a href="#platform" onClick={event => scrollToSection(event, 'platform')}>Platform</a><a href="#technology" onClick={event => scrollToSection(event, 'technology')}>Technology</a><a href="#applications" onClick={event => scrollToSection(event, 'applications')}>Applications</a><a href="#vision" onClick={event => scrollToSection(event, 'vision')}>Vision</a><a href="#about" onClick={event => scrollToSection(event, 'about')}>About</a><button className="nav-cta" type="button" onClick={openAccess}>Get early access ↗</button></div></nav>
+        <a href="platform" onClick={event => scrollToSection(event, 'platform')}>Platform</a><a href="technology" onClick={event => scrollToSection(event, 'technology')}>Technology</a><a href="applications" onClick={event => scrollToSection(event, 'applications')}>Applications</a><a href="vision" onClick={event => scrollToSection(event, 'vision')}>Vision</a><a href="about" onClick={event => scrollToSection(event, 'about')}>About</a><button className="nav-cta" type="button" onClick={openAccess}>Get early access ↗</button></div></nav>
     </section>
     <section className="hero-copy">
       <div className="wrap">
