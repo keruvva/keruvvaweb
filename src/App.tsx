@@ -56,20 +56,43 @@ export default function App() {
         </a>
       <button className="menu-toggle" type="button" aria-expanded={menu} onClick={() => setMenu(!menu)}>{menu ? 'CLOSE ×' : 'MENU ＋'}</button>
       <div className={`nav-links ${menu ? 'open' : ''}`}>
-        <a href="platform" onClick={event => scrollToSection(event, 'platform')}>Platform</a><a href="technology" onClick={event => scrollToSection(event, 'technology')}>Technology</a><a href="applications" onClick={event => scrollToSection(event, 'applications')}>Applications</a><a href="vision" onClick={event => scrollToSection(event, 'vision')}>Vision</a><a href="about" onClick={event => scrollToSection(event, 'about')}>About</a><button className="nav-cta" type="button" onClick={openAccess}>Get early access ↗</button></div></nav>
+        <a href="#platform" onClick={event => scrollToSection(event, 'platform')}>Platform</a><a href="#technology" onClick={event => scrollToSection(event, 'technology')}>Technology</a><a href="#applications" onClick={event => scrollToSection(event, 'applications')}>Applications</a><a href="#vision" onClick={event => scrollToSection(event, 'vision')}>Vision</a><a href="#about" onClick={event => scrollToSection(event, 'about')}>About</a><button className="nav-cta" type="button" onClick={openAccess}>Get early access ↗</button></div></nav>
     </section>
     <section className="hero-copy">
       <div className="wrap hero-copy-layout">
         <div className="hero-copy-content">
-          <p className="eyebrow">AI-POWERED PARTICIPATION INFRASTRUCTURE</p>
-          <h1>Build<br /><em>your</em> world!</h1>
+          <p className="eyebrow">MAKING CITIES PARTICIPATORY</p>
+          <h1>BUILD<br /><em>YOUR </em>WORLD</h1>
+          <p className="hero-copy-message">Keruvva turns the physical world into a participatory digital environment where citizens don't just observe, but actively shape their surroundings.</p>
           <button className="button button-primary" type="button" onClick={openAccess}>Get early access ↗</button>
         </div>
         <div className="city-scene" aria-label="Animated city assembling block by block" role="img">
-          <div className="city-ground" />
+          <div className="city-skyline" />
+          <div className="city-ground"><span className="terrain-hill hill-one" /><span className="terrain-hill hill-two" /></div>
+          <div className="city-roads"><span className="city-road road-main" /><span className="city-road road-branch" /><span className="city-road road-cross" /></div>
           <div className="city-buildings">
             {Array.from({ length: 12 }, (_, index) => <span className={`city-block block-${index + 1}`} key={index} />)}
           </div>
+          <div className="city-trees">
+            {Array.from({ length: 10 }, (_, index) => <span className={`city-tree tree-${index + 1}`} key={index}><i /><b /></span>)}
+          </div>
+        </div>
+      </div>
+    </section>
+    <section className="north-star" aria-labelledby="north-star-title">
+      <div className="wrap north-star-layout">
+        <div className="north-star-intro">
+          <p className="eyebrow">THE KERUVVA NORTH STAR</p>
+          <h2 id="north-star-title">From place<br />to <em>outcome.</em></h2>
+          <p>Keruvva connects the physical world to a participatory digital environment, so institutions can coordinate real-world action and measure what it achieves.</p>
+        </div>
+        <div className="participation-loop" aria-label="Physical world to measurable outcome process">
+          <div className="loop-line" />
+          <article><span>01</span><strong>PHYSICAL WORLD</strong><small>Places, assets and context</small></article>
+          <article><span>02</span><strong>DIGITAL REPRESENTATION</strong><small>A living operational model</small></article>
+          <article><span>03</span><strong>PEOPLE ACT</strong><small>Participation becomes action</small></article>
+          <article><span>04</span><strong>KERUVVA COORDINATES</strong><small>Evidence makes action visible</small></article>
+          <article><span>05</span><strong>MEASURABLE OUTCOME</strong><small>Institutions learn what changed</small></article>
         </div>
       </div>
     </section>
