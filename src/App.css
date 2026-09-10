@@ -1187,6 +1187,10 @@ main {
   height: 42px;
 }
 
+.section-process {
+    background-color: rgb(94, 109, 135);
+}
+
 .participation-bars i {
   display: block;
   width: 7px;
