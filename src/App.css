@@ -1680,9 +1680,11 @@ main {
 }
 
 .intelligence-head p {
-  color: rgba(16, 25, 28, 0.64);
+  color: rgba(255, 255, 255, 0.64);
 }
-
+.intelligence-head h2 {
+    color: white;
+}
 .equation span {
   border-color: rgba(16, 25, 28, 0.18);
   background: rgba(255, 255, 255, 0.3);
@@ -2414,10 +2416,11 @@ h2 em {
 .section-intro h2,
 h2 {
     font-size: clamp(38px, 5.4vw, 74px);
+    color: white;
 }
 
 h2 span {
-    color: #718294;
+    color: #a7b8cb;
 }
 
 .section-intro > p:last-child,
