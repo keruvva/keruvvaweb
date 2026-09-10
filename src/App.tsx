@@ -3,7 +3,7 @@ import type { FormEvent, MouseEvent } from 'react'
 import './App.css'
 import logo from './assets/keruvva-logo.png'
 import heroVideo from './assets/keruvva-hero.mp4'
-import heroPoster from './assets/keruvva-hero-poster.webp'
+import heroPoster from './assets/keruvva-hero-poster.png'
 
 const stages = [
   ['01', 'MAP', 'Represent physical environments digitally.'],
@@ -20,7 +20,14 @@ const applications = [
   ['05', 'ENTERPRISE', 'Coordinate place-based programmes across distributed teams.', 'Shared intelligence for institutional work.'],
   ['06', 'CAMPUSES & DISTRICTS', 'Connect the people, assets and projects that shape a place.', 'A more responsive operating environment.']
 ]
-const layers = ['BUILDING', 'PROJECT', 'INFRASTRUCTURE', 'PEOPLE', 'TASK', 'DATA', 'IMPACT']
+const layers = [
+  "BUILDINGS",
+  "INFRASTRUCTURE",
+  "PROJECTS",
+  "PEOPLE",
+  "ENVIRONMENT",
+  "EVENTS",
+];
 function track(event: string) { window.dispatchEvent(new CustomEvent('keruvva:analytics', { detail: { event } })) }
 
 export default function App() {
@@ -47,7 +54,7 @@ export default function App() {
   return <main>
     <section className={`hero ${menu ? 'menu-open' : ''}`} id="top">
       <div className="hero-fallback" />
-      <video className="hero-video" autoPlay muted loop playsInline poster={heroPoster}>
+      <video className="hero-video" autoPlay muted loop playsInline preload="auto" poster={heroPoster}>
         <source src={heroVideo} type="video/mp4" />
       </video>
       <nav className="nav" aria-label="Main navigation">
@@ -58,122 +65,696 @@ export default function App() {
       <div className={`nav-links ${menu ? 'open' : ''}`}>
         <a href="#platform" onClick={event => scrollToSection(event, 'platform')}>Platform</a><a href="#technology" onClick={event => scrollToSection(event, 'technology')}>Technology</a><a href="#applications" onClick={event => scrollToSection(event, 'applications')}>Applications</a><a href="#vision" onClick={event => scrollToSection(event, 'vision')}>Vision</a><a href="#about" onClick={event => scrollToSection(event, 'about')}>About</a><button className="nav-cta" type="button" onClick={openAccess}>Get early access ↗</button></div></nav>
     </section>
-    <section className="hero-copy">
-      <div className="wrap hero-copy-layout">
-        <div className="hero-copy-content">
-          <p className="eyebrow">MAKING CITIES PARTICIPATORY</p>
-          <h1>BUILD<br /><em>YOUR </em>WORLD</h1>
-          <p className="hero-copy-message">Keruvva turns the physical world into a participatory digital environment where citizens don't just observe, but actively shape their surroundings.</p>
-          <button className="button button-primary" type="button" onClick={openAccess}>Get early access ↗</button>
-        </div>
-        <div className="city-scene" aria-label="Animated city assembling block by block" role="img">
-          <div className="city-skyline" />
-          <div className="city-ground"><span className="terrain-hill hill-one" /><span className="terrain-hill hill-two" /></div>
-          <div className="city-roads"><span className="city-road road-main" /><span className="city-road road-branch" /><span className="city-road road-cross" /></div>
-          <div className="city-buildings">
-            {Array.from({ length: 12 }, (_, index) => <span className={`city-block block-${index + 1}`} key={index} />)}
-          </div>
-          <div className="city-trees">
-            {Array.from({ length: 10 }, (_, index) => <span className={`city-tree tree-${index + 1}`} key={index}><i /><b /></span>)}
-          </div>
-        </div>
+  <section className="hero-copy">
+  <div className="wrap hero-copy-layout">
+    <div className="hero-copy-content">
+      <p className="eyebrow">DISCOVER AND INTERACT WITH<br /> THE DIGITAL TWIN OF YOUR WORLD</p>
+      <h1>
+        BUILD<br />
+        <em>YOUR </em>WORLD
+      </h1>
+
+      <p className="hero-copy-message">
+        Keruvva turns real places into living, interactive digital environments
+        where people can explore what is happening around them, discover
+        opportunities to participate, and help shape what happens next.
+      </p>
+
+      <button
+        className="button button-primary"
+        type="button"
+        onClick={openAccess}
+      >
+        Get early access ↗
+      </button>
+    </div>
+
+    <div
+      className="city-scene"
+      aria-label="Interactive digital twin of a city assembling block by block"
+      role="img"
+    >
+      <div className="city-skyline" />
+
+      <div className="city-ground">
+        <span className="terrain-hill hill-one" />
+        <span className="terrain-hill hill-two" />
       </div>
-    </section>
+
+      <div className="city-roads">
+        <span className="city-road road-main" />
+        <span className="city-road road-branch" />
+        <span className="city-road road-cross" />
+      </div>
+
+      <div className="city-buildings">
+        {Array.from({ length: 12 }, (_, index) => (
+          <span
+            className={`city-block block-${index + 1}`}
+            key={index}
+          />
+        ))}
+      </div>
+
+      <div className="city-trees">
+        {Array.from({ length: 10 }, (_, index) => (
+          <span
+            className={`city-tree tree-${index + 1}`}
+            key={index}
+          >
+            <i />
+            <b />
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
     <section className="north-star" aria-labelledby="north-star-title">
-      <div className="wrap north-star-layout">
-        <div className="north-star-intro">
-          <p className="eyebrow">THE KERUVVA NORTH STAR</p>
-          <h2 id="north-star-title">From place<br />to <em>outcome.</em></h2>
-          <p>Keruvva connects the physical world to a participatory digital environment, so institutions can coordinate real-world action and measure what it achieves.</p>
+  <div className="wrap north-star-layout">
+    <div className="north-star-intro">
+      <p className="eyebrow">THE KERUVVA NORTH STAR</p>
+
+      <h2 id="north-star-title">
+        From reality<br />
+        to <em>impact.</em>
+      </h2>
+
+      <p>
+        Keruvva creates a living digital twin of the physical world,
+        connecting places, people, projects and organisations through an
+        interactive layer built for real-world participation.
+      </p>
+    </div>
+
+    <div
+      className="participation-loop"
+      aria-label="Real world to digital twin to participation to measurable impact feedback loop"
+    >
+      <div className="loop-line" />
+
+      <article>
+        <span>01</span>
+        <strong>THE PHYSICAL WORLD</strong>
+        <small>Places, people, assets, projects and context</small>
+      </article>
+
+      <article>
+        <span>02</span>
+        <strong>THE DIGITAL TWIN</strong>
+        <small>A living, interactive representation of reality</small>
+      </article>
+
+      <article>
+        <span>03</span>
+        <strong>PEOPLE PARTICIPATE</strong>
+        <small>Explore, contribute, collaborate and act</small>
+      </article>
+
+      <article>
+        <span>04</span>
+        <strong>KERUVVA COORDINATES</strong>
+        <small>Connect people, projects and organisations and verify participation</small>
+      </article>
+
+      <article>
+        <span>05</span>
+        <strong>REAL-WORLD IMPACT</strong>
+        <small>Participation becomes visible, measurable and connected to outcomes</small>
+      </article>
+    </div>
+  </div>
+</section>
+<section className="section architecture" id="platform">
+  <div className="wrap">
+    <div className="section-intro">
+      <p className="eyebrow">01 / THE SYSTEM</p>
+      <h2>
+        The physical world is full of signals.
+        <br />
+        <span>Keruvva turns them into action.</span>
+      </h2>
+      <p>
+        Keruvva connects the physical world to its digital twin, then gives
+        people and organisations the intelligence, participation and
+        verification layers needed to turn intent into coordinated,
+        measurable action.
+      </p>
+    </div>
+
+    <div
+      className="system-stack"
+      aria-label="Keruvva platform architecture"
+    >
+      {[
+        {
+          number: "01",
+          title: "PHYSICAL WORLD",
+          description:
+            "Cities, campuses, infrastructure, places and context",
+        },
+        {
+          number: "02",
+          title: "DIGITAL TWIN",
+          description:
+            "A living digital representation of the real world",
+        },
+        {
+          number: "03",
+          title: "INTELLIGENCE",
+          description:
+            "AI interprets context, opportunities and activity",
+        },
+        {
+          number: "04",
+          title: "PARTICIPATION",
+          description:
+            "People discover, interact, contribute and collaborate",
+        },
+        {
+          number: "05",
+          title: "VERIFICATION",
+          description:
+            "Activity and contributions become trusted evidence",
+        },
+        {
+          number: "06",
+          title: "REAL-WORLD ACTION",
+          description:
+            "Coordinated participation produces measurable outcomes",
+        },
+      ].map((item, i, items) => (
+        <div
+          className={`system-node system-node-${i + 1}`}
+          key={item.title}
+        >
+          <span>{item.number}</span>
+
+          <div className="system-node-copy">
+            <b>{item.title}</b>
+            <small>{item.description}</small>
+          </div>
+
+          {i < items.length - 1 && (
+            <i className="system-arrow" aria-hidden="true">
+              ↓
+            </i>
+          )}
+
+          <div className="system-signal" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </div>
         </div>
-        <div className="participation-loop" aria-label="Physical world to measurable outcome process">
-          <div className="loop-line" />
-          <article><span>01</span><strong>PHYSICAL WORLD</strong><small>Places, assets and context</small></article>
-          <article><span>02</span><strong>DIGITAL REPRESENTATION</strong><small>A living operational model</small></article>
-          <article><span>03</span><strong>PEOPLE ACT</strong><small>Participation becomes action</small></article>
-          <article><span>04</span><strong>KERUVVA COORDINATES</strong><small>Evidence makes action visible</small></article>
-          <article><span>05</span><strong>MEASURABLE OUTCOME</strong><small>Institutions learn what changed</small></article>
-        </div>
+      ))}
+    </div>
+
+    <div
+      className="system-feedback"
+      aria-hidden="true"
+    >
+      <span className="feedback-particle particle-one" />
+      <span className="feedback-particle particle-two" />
+      <span className="feedback-particle particle-three" />
+    </div>
+  </div>
+</section>
+<section className="section gap-section" id="vision">
+  <div className="wrap">
+    <p className="eyebrow">02 / THE PARTICIPATION GAP</p>
+
+    <div className="gap-layout">
+      <h2>
+        Intent <span>→</span> coordination
+        <br />
+        <span>→</span> action <span>→</span> verification
+        <br />
+        <span>→</span> impact
+      </h2>
+
+      <div className="gap-copy">
+        <p>
+          Institutions can define projects. People can express interest.
+          Sensors can describe environments. AI can generate recommendations.
+        </p>
+
+        <p>
+          But the systems connecting these signals are often fragmented,
+          leaving a gap between what is planned, what people do, and what
+          actually changes on the ground.
+        </p>
+
+        <strong>
+          Keruvva is being built to close that gap.
+        </strong>
       </div>
-    </section>
-    <section className="section architecture" id="platform">
-      <div className="wrap">
-        <div className="section-intro">
-          <p className="eyebrow">01 / THE SYSTEM</p>
-          <h2>The physical world is full of signals.<br /><span>Keruvva makes them operable.</span></h2>
-          <p>From a place, to its digital representation, to coordinated action. Keruvva is being built to connect the layers that turn intent into outcomes.</p>
-        </div>
-        <div className="system-stack">{['CITY / CAMPUS / INFRASTRUCTURE', 'DIGITAL TWIN', 'AI INTELLIGENCE', 'PARTICIPATION', 'VERIFICATION', 'ACTION'].map((item, i) => 
-          <div className="system-node" key={item}><span>0{i + 1}</span>
-            <b>{item}</b>{i < 5 && <i>↓</i>}
-          </div>)}
-        </div>
+    </div>
+
+    <div className="gap-signal" aria-hidden="true">
+      <span />
+      <span />
+      <span />
+      <span />
+      <span />
+    </div>
+  </div>
+</section>
+<section className="section twin-section" id="technology">
+  <div className="wrap">
+    <div className="section-intro split">
+      <div>
+        <p className="eyebrow">03 / DIGITAL TWIN</p>
+
+        <h2>
+          A digital twin that
+          <br />
+          does <em>more</em> than represent.
+        </h2>
       </div>
-    </section>
-    <section className="section gap-section" id="vision">
-      <div className="wrap">
-        <p className="eyebrow">02 / THE PARTICIPATION GAP</p>
-        <div className="gap-layout">
-          <h2>Intent <span>→</span> coordination<br /><span>→</span> action <span>→</span> verification<br /><span>→</span> impact</h2>
+
+      <p>
+        Keruvva turns places into interactive digital environments where
+        physical context, projects, infrastructure, people, data and
+        opportunities can exist in one continuously evolving system.
+      </p>
+    </div>
+
+    <div className="twin-visual">
+  <div className="twin-console">
+
+    {/* DIGITAL TWIN VIEW */}
+    <div className="twin-map">
+
+      <div className="map-header">
+        <div>
+          <span className="live-dot" />
+          <span>KERUVVA DIGITAL TWIN</span>
+        </div>
+
+        <small>CALGARY · AB</small>
+      </div>
+
+      {/* Stylised city/map layer */}
+      <div className="city-map" aria-hidden="true">
+
+        <div className="map-river" />
+
+        <div className="map-road road-a" />
+        <div className="map-road road-b" />
+        <div className="map-road road-c" />
+        <div className="map-road road-d" />
+        <div className="map-road road-e" />
+
+        <div className="map-district district-one" />
+        <div className="map-district district-two" />
+        <div className="map-district district-three" />
+
+        {/* Dynamic markers */}
+        <div className={`map-marker marker-one ${layer === "BUILDINGS" ? "visible active" : ""}`}>
+          <span />
+        </div>
+
+        <div className={`map-marker marker-two ${layer === "INFRASTRUCTURE" ? "visible active" : ""}`}>
+          <span />
+        </div>
+
+        <div className={`map-marker marker-three ${layer === "PROJECTS" ? "visible active" : ""}`}>
+          <span />
+        </div>
+
+        <div className={`map-marker marker-four ${layer === "PEOPLE" ? "visible active" : ""}`}>
+          <span />
+        </div>
+
+        <div className={`map-marker marker-five ${layer === "ENVIRONMENT" ? "visible active" : ""}`}>
+          <span />
+        </div>
+
+        <div className={`map-marker marker-six ${layer === "EVENTS" ? "visible active" : ""}`}>
+          <span />
+        </div>
+
+        {/* Scanning effect */}
+        <div className="map-scan" />
+      </div>
+
+      <div className="map-footer">
+        <span>LIVE CONTEXT</span>
+        <span>51.0447° N · 114.0719° W</span>
+      </div>
+    </div>
+
+
+    {/* LAYER CONTROLS */}
+    <div className="layer-panel">
+
+      <div className="layer-panel-header">
+        <p className="eyebrow">ENVIRONMENT LAYERS</p>
+        <span>INTERACTIVE</span>
+      </div>
+
+      {layers.map((item) => (
+        <button
+          className={layer === item ? "active" : ""}
+          key={item}
+          type="button"
+          onMouseEnter={() => setLayer(item)}
+          onFocus={() => setLayer(item)}
+          onClick={() => setLayer(item)}
+        >
+          <span className="layer-indicator" />
+          <strong>{item}</strong>
+          <b>{layer === item ? "ACTIVE" : "VIEW"}</b>
+        </button>
+      ))}
+
+      <div className="layer-readout">
+        <small>ACTIVE LAYER</small>
+
+        <strong>{layer}</strong>
+
+        <span>
+          {layer === "BUILDINGS" &&
+            "Buildings, occupancy and spatial context"}
+
+          {layer === "INFRASTRUCTURE" &&
+            "Roads, assets, services and infrastructure status"}
+
+          {layer === "PROJECTS" &&
+            "Active initiatives and opportunities for participation"}
+
+          {layer === "PEOPLE" &&
+            "Participation, activity and community signals"}
+
+          {layer === "ENVIRONMENT" &&
+            "Environmental conditions and local indicators"}
+
+          {layer === "EVENTS" &&
+            "Live events, activities and local opportunities"}
+        </span>
+      </div>
+    </div>
+  </div>
+
+
+  {/* DYNAMIC INTELLIGENCE PANEL */}
+  <div className="twin-data-panel">
+
+    <div className="twin-data-heading">
+      <div>
+        <span className="live-dot" />
+        LIVE DIGITAL CONTEXT
+      </div>
+
+      <span>CALGARY / 01</span>
+    </div>
+
+
+    {/* BUILDINGS */}
+    {layer === "BUILDINGS" && (
+      <div className="twin-data-content">
+        <small>SPATIAL INTELLIGENCE</small>
+
+        <h3>
+          Buildings become
+          <em> interactive.</em>
+        </h3>
+
+        <p>
+          A digital representation can expose building context,
+          occupancy, activity and opportunities connected to a place.
+        </p>
+
+        <div className="twin-metrics">
           <div>
-            <p>Institutions can define projects. People can express interest. Data can describe environments. AI can generate recommendations.</p>
-            <p>But these systems often remain disconnected from the physical execution layer.</p><strong>Keruvva is being built to close that gap.</strong>
+            <strong>128</strong>
+            <span>Mapped assets</span>
           </div>
-        </div>
-      </div>
-    </section>
-    <section className="section twin-section" id="technology">
-      <div className="wrap">
-        <div className="section-intro split">
+
           <div>
-            <p className="eyebrow">03 / DIGITAL TWIN</p>
-            <h2>A digital twin that does <em>more</em> than represent.</h2>
+            <strong>42</strong>
+            <span>Active spaces</span>
           </div>
-          <p>The digital environment becomes an operational interface connecting places, projects, infrastructure, organizations, people, actions, data, AI and outcomes.</p>
-        </div>
-        <div className="twin-visual">
-          <div className="twin-grid">
-            <div className="twin-building">
-              <i /><i /><i /><i /><i /><i />
-            </div>
-            <span className="coordinate c1">BUILDING</span>
-            <span className="coordinate c2">+43.612 / -2.041</span>
-            <span className="coordinate c3">LIVE CONTEXT</span>
-          </div>
-          <div className="layer-panel">
-            <p className="eyebrow">ENVIRONMENT LAYERS</p>{layers.map(item => 
-            <button className={layer === item ? 'active' : ''} key={item} type="button" onMouseEnter={() => setLayer(item)} onFocus={() => setLayer(item)} onClick={() => setLayer(item)}><span />{item}
-              <b>{layer === item ? 'ACTIVE' : 'VIEW'}</b>
-            </button>)}
-            <div className="layer-readout">
-              <small>ACTIVE LAYER</small>
-              <strong>{layer}</strong>
-              <span>Context available for coordination</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section className="section intelligence">
-      <div className="wrap">
-        <p className="eyebrow">04 / INFRASTRUCTURE INTELLIGENCE</p>
-        <div className="intelligence-head"><h2>From digital twin to<br /><em>infrastructure intelligence.</em></h2><p>A representation becomes significantly more valuable when it connects environmental context, institutional objectives, human participation and measurable outcomes.</p></div><div className="equation"><div>{['DATA', 'ENVIRONMENT', 'AI', 'PEOPLE', 'PROJECTS', 'VERIFICATION'].map(x => <span key={x}>{x}</span>)}</div><b>=</b><strong>INFRASTRUCTURE<br />INTELLIGENCE</strong></div></div></section>
-    <section className="section process">
-      <div className="wrap">
-        <div className="section-intro split">
+
           <div>
-            <p className="eyebrow">05 / HOW IT WORKS</p>
-            <h2>A system designed<br />for the <em>real world.</em></h2>
+            <strong>17</strong>
+            <span>Open opportunities</span>
           </div>
-          <p>Five connected stages. One continuous loop from context to consequence.</p>
-        </div>
-        <div className="stage-list">{stages.map(([n, title, text]) => 
-          <article className="stage" key={n}><span>{n}</span>
-            <h3>{title}</h3><p>{text}</p><i>↗</i>
-          </article>)}
         </div>
       </div>
-    </section>
+    )}
+
+
+    {/* INFRASTRUCTURE */}
+    {layer === "INFRASTRUCTURE" && (
+      <div className="twin-data-content">
+        <small>INFRASTRUCTURE INTELLIGENCE</small>
+
+        <h3>
+          See what needs
+          <em> attention.</em>
+        </h3>
+
+        <p>
+          Infrastructure becomes a living layer that can expose
+          conditions, activity, maintenance signals and intervention
+          opportunities.
+        </p>
+
+        <div className="twin-status-list">
+          <div>
+            <span className="status-warning" />
+            Road maintenance
+            <b>3 signals</b>
+          </div>
+
+          <div>
+            <span className="status-live" />
+            Public infrastructure
+            <b>12 active</b>
+          </div>
+
+          <div>
+            <span className="status-live" />
+            Mobility network
+            <b>98% available</b>
+          </div>
+        </div>
+      </div>
+    )}
+
+
+    {/* PROJECTS */}
+    {layer === "PROJECTS" && (
+      <div className="twin-data-content">
+        <small>PARTICIPATION OPPORTUNITIES</small>
+
+        <h3>
+          Projects become
+          <em> discoverable.</em>
+        </h3>
+
+        <p>
+          Organisations can place real initiatives directly into the
+          digital environment, where people can discover and participate.
+        </p>
+
+        <div className="project-card">
+          <div>
+            <span>OPEN</span>
+            <strong>Neighbourhood Greening</strong>
+          </div>
+
+          <small>12 participants · 3.4 km away</small>
+
+          <button type="button">
+            Explore project ↗
+          </button>
+        </div>
+      </div>
+    )}
+
+
+    {/* PEOPLE */}
+    {layer === "PEOPLE" && (
+      <div className="twin-data-content">
+        <small>PARTICIPATION SIGNALS</small>
+
+        <h3>
+          People become
+          <em> part of the system.</em>
+        </h3>
+
+        <p>
+          Participation is no longer hidden inside forms, apps or
+          disconnected platforms. Activity becomes part of the place.
+        </p>
+
+        <div className="participation-visual">
+          <div>
+            <strong>247</strong>
+            <span>People active</span>
+          </div>
+
+          <div className="participation-bars">
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+          </div>
+        </div>
+      </div>
+    )}
+
+
+    {/* ENVIRONMENT */}
+    {layer === "ENVIRONMENT" && (
+      <div className="twin-data-content">
+        <small>ENVIRONMENTAL CONTEXT</small>
+
+        <h3>
+          Context changes
+          <em> what is possible.</em>
+        </h3>
+
+        <p>
+          Environmental conditions become part of the digital twin,
+          helping people and organisations understand the context around
+          real-world activity.
+        </p>
+
+        <div className="environment-readout">
+          <div>
+            <strong>LIVE</strong>
+            <span>Environmental context</span>
+          </div>
+
+          <div>
+            <strong>24</strong>
+            <span>Active indicators</span>
+          </div>
+        </div>
+      </div>
+    )}
+
+
+    {/* EVENTS */}
+    {layer === "EVENTS" && (
+      <div className="twin-data-content">
+        <small>LIVE LOCAL ACTIVITY</small>
+
+        <h3>
+          Places become
+          <em> alive with activity.</em>
+        </h3>
+
+        <p>
+          Events, activities and opportunities can exist directly inside
+          the digital representation of a place.
+        </p>
+
+        <div className="event-feed">
+          <div>
+            <span>NOW</span>
+            <strong>Community activity</strong>
+            <small>East Village · 84 participants</small>
+          </div>
+
+          <div>
+            <span>18:30</span>
+            <strong>Local sustainability event</strong>
+            <small>Downtown · Open participation</small>
+          </div>
+        </div>
+      </div>
+    )}
+  </div>
+</div>
+  </div>
+</section>
+<section className="section intelligence">
+  <div className="wrap">
+    <p className="eyebrow">04 / INFRASTRUCTURE INTELLIGENCE</p>
+
+    <div className="intelligence-head">
+      <h2>
+        A digital twin becomes powerful when it
+        <br />
+        becomes <em>intelligent.</em>
+      </h2>
+
+      <p>
+        Keruvva brings environmental context, institutional objectives,
+        human participation, project data and verification into the same
+        operating environment—allowing the system to surface connections,
+        opportunities and actions.
+      </p>
+    </div>
+
+    <div className="equation">
+      <div className="equation-inputs">
+        {[
+          "DATA",
+          "ENVIRONMENT",
+          "AI",
+          "PEOPLE",
+          "PROJECTS",
+          "VERIFICATION",
+        ].map((x) => (
+          <span key={x}>{x}</span>
+        ))}
+      </div>
+
+      <b>=</b>
+      <strong>
+        INFRASTRUCTURE
+        <br />
+        INTELLIGENCE
+      </strong>
+    </div>
+  </div>
+</section> 
+<section className="section process">
+  <div className="wrap">
+    <div className="section-intro split">
+      <div>
+        <p className="eyebrow">05 / HOW IT WORKS</p>
+
+        <h2>
+          A system designed
+          <br />
+          for the <em>real world.</em>
+        </h2>
+      </div>
+
+      <p>
+        Five connected stages create a continuous loop between context,
+        participation, verification and consequence.
+      </p>
+    </div>
+
+    <div className="stage-list">
+      {stages.map(([n, title, text]) => (
+        <article className="stage" key={n}>
+          <span>{n}</span>
+
+          <div className="stage-content">
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </div>
+
+          <i aria-hidden="true">↗</i>
+
+          <div className="stage-progress" aria-hidden="true" />
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
     <section className="section product-section">
       <div className="wrap">
         <div className="product-kicker">

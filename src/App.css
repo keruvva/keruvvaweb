@@ -363,7 +363,7 @@ main {
 
 .north-star {
     padding: 120px 0 135px;
-    background: #edf2f3;
+    background: #011421;
     color: #17232a;
     border-top: 1px solid rgba(23, 35, 42, 0.15);
 }
@@ -377,12 +377,13 @@ main {
 
 .north-star .eyebrow {
     color: #657780;
+    font-size: medium;
 }
 
 .north-star h2 {
     max-width: 620px;
     margin: 0;
-    color: #17232a;
+    color: #e0e4e6;
     font-size: clamp(52px, 6vw, 88px);
     line-height: 0.98;
 }
@@ -404,6 +405,1527 @@ main {
     position: relative;
     display: grid;
     gap: 0;
+}
+
+/* =========================================================
+   KERUVVA SYSTEM — SIGNAL FLOW
+   ========================================================= */
+
+.architecture {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(66, 214, 197, 0.08),
+      transparent 42%
+    ),
+    #dce5e8;
+  color: #101820;
+}
+
+.architecture .section-intro {
+  position: relative;
+  z-index: 2;
+}
+
+.architecture .section-intro span {
+  color: #315b63;
+}
+
+.system-stack {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  margin: 80px auto 0;
+}
+
+.system-node {
+  position: relative;
+  display: grid;
+  grid-template-columns: 64px 1fr 40px;
+  align-items: center;
+  min-height: 112px;
+  padding: 24px 28px;
+  border: 1px solid rgba(16, 24, 32, 0.14);
+  background: rgba(255, 255, 255, 0.42);
+  backdrop-filter: blur(12px);
+  transition:
+    transform 500ms ease,
+    border-color 500ms ease,
+    background 500ms ease,
+    box-shadow 500ms ease;
+}
+
+.system-node:hover {
+  transform: translateX(8px);
+  border-color: rgba(66, 214, 197, 0.65);
+  background: rgba(255, 255, 255, 0.68);
+  box-shadow: 0 18px 45px rgba(16, 24, 32, 0.08);
+}
+
+.system-node > span {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  opacity: 0.48;
+}
+
+.system-node-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.system-node-copy b {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+}
+
+.system-node-copy small {
+  max-width: 520px;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  opacity: 0.62;
+}
+
+.system-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-style: normal;
+  font-size: 1.2rem;
+  opacity: 0.45;
+}
+
+/* =========================================================
+   KERUVVA DIGITAL TWIN
+   ========================================================= */
+
+.twin-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 70px;
+}
+
+
+/* =========================================================
+   MAIN CONSOLE
+   ========================================================= */
+
+.twin-console {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.75fr);
+  min-height: 560px;
+  overflow: hidden;
+  border: 1px solid rgba(120, 169, 165, 0.2);
+  background: #0d171a;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.25),
+    inset 0 0 80px rgba(66, 214, 197, 0.025);
+}
+
+
+/* =========================================================
+   MAP
+   ========================================================= */
+
+.twin-map {
+  position: relative;
+  min-height: 560px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(66, 214, 197, 0.08),
+      transparent 45%
+    ),
+    #101d20;
+}
+
+.map-header,
+.map-footer {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.map-header {
+  top: 22px;
+}
+
+.map-header > div {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.13em;
+}
+
+.map-header small,
+.map-footer {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: rgba(237, 245, 243, 0.45);
+}
+
+.map-footer {
+  bottom: 20px;
+}
+
+.map-footer span:first-child {
+  color: #66d6c8;
+}
+
+
+/* =========================================================
+   LIVE INDICATOR
+   ========================================================= */
+
+.live-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #66d6c8;
+  box-shadow: 0 0 12px rgba(102, 214, 200, 0.9);
+  animation: livePulse 2s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.8);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+
+/* =========================================================
+   CITY MAP
+   ========================================================= */
+
+.city-map {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.map-road {
+  position: absolute;
+  background: rgba(190, 215, 211, 0.08);
+}
+
+.road-a {
+  width: 140%;
+  height: 2px;
+  left: -20%;
+  top: 47%;
+  transform: rotate(-13deg);
+}
+
+.road-b {
+  width: 140%;
+  height: 1px;
+  left: -20%;
+  top: 61%;
+  transform: rotate(7deg);
+}
+
+.road-c {
+  width: 2px;
+  height: 130%;
+  left: 43%;
+  top: -15%;
+  transform: rotate(18deg);
+}
+
+.road-d {
+  width: 2px;
+  height: 130%;
+  left: 63%;
+  top: -15%;
+  transform: rotate(-8deg);
+}
+
+.road-e {
+  width: 110%;
+  height: 1px;
+  left: -5%;
+  top: 35%;
+  transform: rotate(31deg);
+}
+
+.map-river {
+  position: absolute;
+  width: 150%;
+  height: 90px;
+  left: -25%;
+  top: 68%;
+  border-top: 1px solid rgba(102, 214, 200, 0.16);
+  border-bottom: 1px solid rgba(102, 214, 200, 0.08);
+  transform: rotate(-8deg);
+  background: rgba(66, 214, 197, 0.025);
+}
+
+.map-district {
+  position: absolute;
+  border: 1px solid rgba(237, 245, 243, 0.05);
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.district-one {
+  width: 180px;
+  height: 130px;
+  left: 20%;
+  top: 28%;
+}
+
+.district-two {
+  width: 220px;
+  height: 160px;
+  left: 50%;
+  top: 25%;
+}
+
+.district-three {
+  width: 170px;
+  height: 140px;
+  left: 37%;
+  top: 58%;
+}
+
+
+/* =========================================================
+   MAP SCAN
+   ========================================================= */
+
+.map-scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  top: 20%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(102, 214, 200, 0.45),
+    transparent
+  );
+  box-shadow: 0 0 20px rgba(102, 214, 200, 0.25);
+  animation: mapScan 6s linear infinite;
+}
+
+@keyframes mapScan {
+  0% {
+    top: 15%;
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    top: 85%;
+    opacity: 0;
+  }
+}
+
+
+/* =========================================================
+   MAP MARKERS
+   ========================================================= */
+
+.map-marker {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  opacity: 0;
+  transform: scale(0.5);
+  transition:
+    opacity 450ms ease,
+    transform 450ms ease;
+}
+
+.map-marker.visible {
+  opacity: 0.7;
+  transform: scale(1);
+}
+
+.map-marker.active {
+  opacity: 1;
+  transform: scale(1.25);
+}
+
+.map-marker span {
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: #66d6c8;
+  box-shadow:
+    0 0 0 4px rgba(102, 214, 200, 0.12),
+    0 0 22px rgba(102, 214, 200, 0.7);
+}
+
+.map-marker::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border: 1px solid rgba(102, 214, 200, 0.4);
+  border-radius: 50%;
+  animation: markerPulse 2.5s ease-out infinite;
+}
+
+@keyframes markerPulse {
+  0% {
+    transform: scale(0.4);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+.marker-one {
+  left: 31%;
+  top: 39%;
+}
+
+.marker-two {
+  left: 56%;
+  top: 47%;
+}
+
+.marker-three {
+  left: 68%;
+  top: 31%;
+}
+
+.marker-four {
+  left: 45%;
+  top: 56%;
+}
+
+.marker-five {
+  left: 28%;
+  top: 67%;
+}
+
+.marker-six {
+  left: 70%;
+  top: 62%;
+}
+
+
+/* =========================================================
+   LAYER PANEL
+   ========================================================= */
+
+.layer-panel {
+  display: flex;
+  flex-direction: column;
+  padding: 28px 24px;
+  border-left: 1px solid rgba(120, 169, 165, 0.14);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.layer-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.layer-panel-header .eyebrow {
+  margin: 0;
+}
+
+.layer-panel-header > span {
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  color: #66d6c8;
+}
+
+
+.layer-panel button {
+  position: relative;
+  display: grid;
+  grid-template-columns: 12px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 10px;
+  border: 1px solid transparent;
+  border-bottom-color: rgba(237, 245, 243, 0.08);
+  background: transparent;
+  color: rgba(237, 245, 243, 0.5);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    color 250ms ease,
+    background 250ms ease,
+    border-color 250ms ease;
+}
+
+.layer-panel button:hover,
+.layer-panel button.active {
+  color: #edf5f3;
+  background: rgba(102, 214, 200, 0.06);
+  border-color: rgba(102, 214, 200, 0.22);
+}
+
+.layer-indicator {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.layer-panel button.active .layer-indicator {
+  background: #66d6c8;
+  box-shadow: 0 0 10px rgba(102, 214, 200, 0.8);
+}
+
+.layer-panel button strong {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.67rem;
+  letter-spacing: 0.08em;
+}
+
+.layer-panel button b {
+  font-size: 0.52rem;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  opacity: 0.45;
+}
+
+
+/* =========================================================
+   READOUT
+   ========================================================= */
+
+.layer-readout {
+  margin-top: auto;
+  padding: 18px;
+  border: 1px solid rgba(102, 214, 200, 0.18);
+  background: rgba(102, 214, 200, 0.045);
+}
+
+.layer-readout small {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  color: #66d6c8;
+}
+
+.layer-readout strong {
+  display: block;
+  margin-bottom: 7px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.07em;
+}
+
+.layer-readout span {
+  display: block;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: rgba(237, 245, 243, 0.5);
+}
+
+
+/* =========================================================
+   DYNAMIC DATA PANEL
+   ========================================================= */
+
+.twin-data-panel {
+  position: relative;
+  min-height: 270px;
+  padding: 22px 26px;
+  border: 1px solid rgba(120, 169, 165, 0.14);
+  background: #101b1e;
+}
+
+.twin-data-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(237, 245, 243, 0.08);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.11em;
+}
+
+.twin-data-heading > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.twin-data-heading > span {
+  color: rgba(237, 245, 243, 0.35);
+}
+
+.twin-data-content {
+  padding-top: 24px;
+  animation: dataEnter 400ms ease both;
+}
+
+@keyframes dataEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.twin-data-content > small {
+  color: #66d6c8;
+  font-size: 0.57rem;
+  letter-spacing: 0.12em;
+}
+
+.twin-data-content h3 {
+  max-width: 620px;
+  margin: 9px 0 9px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+
+.twin-data-content h3 em {
+  color: #66d6c8;
+}
+
+.twin-data-content > p {
+  max-width: 700px;
+  margin: 0;
+  color: rgba(237, 245, 243, 0.52);
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   METRICS
+   ========================================================= */
+
+.twin-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin-top: 24px;
+  border: 1px solid rgba(237, 245, 243, 0.08);
+}
+
+.twin-metrics div {
+  padding: 15px;
+  border-right: 1px solid rgba(237, 245, 243, 0.08);
+}
+
+.twin-metrics div:last-child {
+  border-right: 0;
+}
+
+.twin-metrics strong {
+  display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.35rem;
+}
+
+.twin-metrics span {
+  font-size: 0.62rem;
+  color: rgba(237, 245, 243, 0.42);
+}
+
+
+/* =========================================================
+   STATUS LIST
+   ========================================================= */
+
+.twin-status-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 22px;
+}
+
+.twin-status-list div {
+  display: grid;
+  grid-template-columns: 8px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid rgba(237, 245, 243, 0.07);
+  font-size: 0.7rem;
+}
+
+.twin-status-list b {
+  font-size: 0.58rem;
+  font-weight: 500;
+  color: #66d6c8;
+}
+
+.status-live,
+.status-warning {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+.status-live {
+  background: #66d6c8;
+}
+
+.status-warning {
+  background: #d4ad63;
+}
+
+
+/* =========================================================
+   PROJECT
+   ========================================================= */
+
+.project-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 22px;
+  padding: 15px;
+  border: 1px solid rgba(102, 214, 200, 0.2);
+  background: rgba(102, 214, 200, 0.04);
+}
+
+.project-card > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.project-card > div span {
+  font-size: 0.52rem;
+  letter-spacing: 0.1em;
+  color: #66d6c8;
+}
+
+.project-card strong {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.8rem;
+}
+
+.project-card > small {
+  color: rgba(237, 245, 243, 0.4);
+}
+
+.project-card button {
+  padding: 8px 11px;
+  border: 1px solid rgba(102, 214, 200, 0.3);
+  background: transparent;
+  color: #edf5f3;
+  font-size: 0.6rem;
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   PARTICIPATION
+   ========================================================= */
+
+.participation-visual {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  margin-top: 25px;
+}
+
+.participation-visual > div:first-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.participation-visual strong {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.7rem;
+}
+
+.participation-visual span {
+  font-size: 0.6rem;
+  color: rgba(237, 245, 243, 0.4);
+}
+
+.participation-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 42px;
+}
+
+.participation-bars i {
+  display: block;
+  width: 7px;
+  background: #66d6c8;
+  animation: barPulse 1.8s ease-in-out infinite alternate;
+}
+
+.participation-bars i:nth-child(1) {
+  height: 18px;
+}
+
+.participation-bars i:nth-child(2) {
+  height: 30px;
+  animation-delay: 0.2s;
+}
+
+.participation-bars i:nth-child(3) {
+  height: 23px;
+  animation-delay: 0.4s;
+}
+
+.participation-bars i:nth-child(4) {
+  height: 40px;
+  animation-delay: 0.6s;
+}
+
+.participation-bars i:nth-child(5) {
+  height: 27px;
+  animation-delay: 0.8s;
+}
+
+.participation-bars i:nth-child(6) {
+  height: 36px;
+  animation-delay: 1s;
+}
+
+.participation-bars i:nth-child(7) {
+  height: 20px;
+  animation-delay: 1.2s;
+}
+
+@keyframes barPulse {
+  from {
+    opacity: 0.35;
+    transform: scaleY(0.75);
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+
+/* =========================================================
+   ENVIRONMENT
+   ========================================================= */
+
+.environment-readout {
+  display: flex;
+  gap: 1px;
+  margin-top: 22px;
+}
+
+.environment-readout div {
+  min-width: 160px;
+  padding: 14px;
+  border: 1px solid rgba(237, 245, 243, 0.08);
+}
+
+.environment-readout strong,
+.environment-readout span {
+  display: block;
+}
+
+.environment-readout strong {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1rem;
+}
+
+.environment-readout span {
+  margin-top: 4px;
+  font-size: 0.6rem;
+  color: rgba(237, 245, 243, 0.4);
+}
+
+
+/* =========================================================
+   EVENTS
+   ========================================================= */
+
+.event-feed {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.event-feed div {
+  padding: 14px;
+  border-left: 2px solid #66d6c8;
+  background: rgba(102, 214, 200, 0.035);
+}
+
+.event-feed span,
+.event-feed strong,
+.event-feed small {
+  display: block;
+}
+
+.event-feed span {
+  margin-bottom: 7px;
+  font-size: 0.53rem;
+  letter-spacing: 0.1em;
+  color: #66d6c8;
+}
+
+.event-feed strong {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.7rem;
+}
+
+.event-feed small {
+  margin-top: 5px;
+  font-size: 0.58rem;
+  color: rgba(237, 245, 243, 0.4);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .twin-console {
+    grid-template-columns: 1fr;
+  }
+
+  .layer-panel {
+    border-left: 0;
+    border-top: 1px solid rgba(120, 169, 165, 0.14);
+  }
+
+  .layer-readout {
+    margin-top: 22px;
+  }
+}
+
+@media (max-width: 600px) {
+  .twin-map {
+    min-height: 420px;
+  }
+
+  .twin-metrics,
+  .event-feed {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .environment-readout {
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live-dot,
+  .map-scan,
+  .map-marker::before,
+  .twin-data-content,
+  .participation-bars i {
+    animation: none;
+  }
+}
+/* =========================================================
+   KERUVVA SYSTEM — SIGNAL FLOW
+   ========================================================= */
+
+.architecture {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(66, 214, 197, 0.08),
+      transparent 42%
+    ),
+    #dce5e8;
+  color: #101820;
+}
+
+.architecture .section-intro {
+  position: relative;
+  z-index: 2;
+}
+
+.architecture .section-intro span {
+  color: #315b63;
+}
+
+.system-stack {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  margin: 80px auto 0;
+}
+
+.system-node {
+  position: relative;
+  display: grid;
+  grid-template-columns: 64px 1fr 40px;
+  align-items: center;
+  min-height: 112px;
+  padding: 24px 28px;
+  border: 1px solid rgba(16, 24, 32, 0.14);
+  background: rgba(255, 255, 255, 0.42);
+  backdrop-filter: blur(12px);
+  transition:
+    transform 500ms ease,
+    border-color 500ms ease,
+    background 500ms ease,
+    box-shadow 500ms ease;
+}
+
+.system-node:hover {
+  transform: translateX(8px);
+  border-color: rgba(66, 214, 197, 0.65);
+  background: rgba(255, 255, 255, 0.68);
+  box-shadow: 0 18px 45px rgba(16, 24, 32, 0.08);
+}
+
+.system-node > span {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  opacity: 0.48;
+}
+
+.system-node-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.system-node-copy b {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+}
+
+.system-node-copy small {
+  max-width: 520px;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  opacity: 0.62;
+}
+
+.system-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-style: normal;
+  font-size: 1.2rem;
+  opacity: 0.45;
+}
+
+
+/* ---------------------------------------------------------
+   DIGITAL TWIN — VISUAL ANCHOR
+   --------------------------------------------------------- */
+
+.system-node-2 {
+  border-color: rgba(66, 214, 197, 0.45);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(66, 214, 197, 0.12),
+      rgba(255, 255, 255, 0.5)
+    );
+  box-shadow:
+    0 0 0 1px rgba(66, 214, 197, 0.08),
+    0 0 55px rgba(66, 214, 197, 0.08);
+}
+
+.system-node-2::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid rgba(66, 214, 197, 0.35);
+  pointer-events: none;
+  animation: twinPulse 3.5s ease-in-out infinite;
+}
+
+
+/* ---------------------------------------------------------
+   SIGNALS
+   --------------------------------------------------------- */
+
+.system-signal {
+  position: absolute;
+  right: 28px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  transform: translateY(-50%);
+}
+
+.system-signal span {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #42d6c5;
+  opacity: 0;
+  animation: signalMove 3.8s linear infinite;
+}
+
+.system-signal span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.system-signal span:nth-child(2) {
+  animation-delay: 1.25s;
+}
+
+.system-signal span:nth-child(3) {
+  animation-delay: 2.5s;
+}
+
+
+/* ---------------------------------------------------------
+   FEEDBACK PARTICLES
+   --------------------------------------------------------- */
+
+.system-feedback {
+  position: absolute;
+  left: 50%;
+  top: 145px;
+  width: 1px;
+  height: calc(100% - 220px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.feedback-particle {
+  position: absolute;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #42d6c5;
+  box-shadow: 0 0 18px rgba(66, 214, 197, 0.55);
+  opacity: 0;
+  animation: feedbackFlow 7s linear infinite;
+}
+
+.particle-one {
+  animation-delay: 0s;
+}
+
+.particle-two {
+  animation-delay: 2.3s;
+}
+
+.particle-three {
+  animation-delay: 4.6s;
+}
+
+
+/* ---------------------------------------------------------
+   ANIMATIONS
+   --------------------------------------------------------- */
+
+@keyframes twinPulse {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.012);
+  }
+}
+
+@keyframes signalMove {
+  0% {
+    transform: translateX(-18px) scale(0.5);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.9;
+  }
+
+  75% {
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: translateX(18px) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes feedbackFlow {
+  0% {
+    top: 0;
+    transform: translateX(-90px) scale(0.4);
+    opacity: 0;
+  }
+
+  12% {
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: translateX(90px) scale(1);
+    opacity: 1;
+  }
+
+  88% {
+    opacity: 0.8;
+  }
+
+  100% {
+    top: 100%;
+    transform: translateX(-90px) scale(0.4);
+    opacity: 0;
+  }
+}
+.gap-section {
+  background: #eee9df;
+  color: #171b1c;
+}
+
+.gap-section .eyebrow {
+  color: #64706f;
+}
+
+.gap-section h2 span {
+  color: #315b63;
+}
+
+.gap-copy strong {
+  color: #315b63;
+}
+
+.twin-section {
+  background: #091216;
+  color: #edf5f3;
+}
+
+.twin-section .section-intro p:last-child {
+  color: rgba(237, 245, 243, 0.64);
+}
+
+.twin-section .eyebrow {
+  color: #78a9a5;
+}
+
+.twin-section .coordinate {
+  color: #66d6c8;
+}
+
+.twin-section .layer-panel {
+  border-color: rgba(120, 169, 165, 0.2);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.twin-section .layer-panel button {
+  color: rgba(237, 245, 243, 0.62);
+}
+
+.twin-section .layer-panel button.active {
+  color: #edf5f3;
+  border-color: rgba(102, 214, 200, 0.5);
+}
+
+.intelligence {
+  background: #cfdde0;
+  color: #10191c;
+}
+
+.intelligence .eyebrow {
+  color: #527176;
+}
+
+.intelligence-head p {
+  color: rgba(16, 25, 28, 0.64);
+}
+
+.equation span {
+  border-color: rgba(16, 25, 28, 0.18);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.equation strong {
+  color: #315b63;
+}
+
+.process {
+  background: #121719;
+  color: #edf2ef;
+}
+
+.process .eyebrow {
+  color: #78a9a5;
+}
+
+.process .section-intro p:last-child {
+  color: rgba(237, 242, 239, 0.6);
+}
+
+.process .stage {
+  border-color: rgba(237, 242, 239, 0.13);
+}
+
+.process .stage:hover {
+  border-color: rgba(102, 214, 200, 0.45);
+}
+
+.process .stage-progress {
+  background: #66d6c8;
+}
+
+/* ---------------------------------------------------------
+   REDUCED MOTION
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .system-node,
+  .system-node::before,
+  .system-signal span,
+  .feedback-particle {
+    animation: none;
+    transition: none;
+  }
+}
+/* ---------------------------------------------------------
+   DIGITAL TWIN — VISUAL ANCHOR
+   --------------------------------------------------------- */
+
+.system-node-2 {
+  border-color: rgba(66, 214, 197, 0.45);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(66, 214, 197, 0.12),
+      rgba(255, 255, 255, 0.5)
+    );
+  box-shadow:
+    0 0 0 1px rgba(66, 214, 197, 0.08),
+    0 0 55px rgba(66, 214, 197, 0.08);
+}
+
+.system-node-2::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid rgba(66, 214, 197, 0.35);
+  pointer-events: none;
+  animation: twinPulse 3.5s ease-in-out infinite;
+}
+
+
+/* ---------------------------------------------------------
+   SIGNALS
+   --------------------------------------------------------- */
+
+.system-signal {
+  position: absolute;
+  right: 28px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  transform: translateY(-50%);
+}
+
+.system-signal span {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #42d6c5;
+  opacity: 0;
+  animation: signalMove 3.8s linear infinite;
+}
+
+.system-signal span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.system-signal span:nth-child(2) {
+  animation-delay: 1.25s;
+}
+
+.system-signal span:nth-child(3) {
+  animation-delay: 2.5s;
+}
+
+
+/* ---------------------------------------------------------
+   FEEDBACK PARTICLES
+   --------------------------------------------------------- */
+
+.system-feedback {
+  position: absolute;
+  left: 50%;
+  top: 145px;
+  width: 1px;
+  height: calc(100% - 220px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.feedback-particle {
+  position: absolute;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #42d6c5;
+  box-shadow: 0 0 18px rgba(66, 214, 197, 0.55);
+  opacity: 0;
+  animation: feedbackFlow 7s linear infinite;
+}
+
+.particle-one {
+  animation-delay: 0s;
+}
+
+.particle-two {
+  animation-delay: 2.3s;
+}
+
+.particle-three {
+  animation-delay: 4.6s;
+}
+
+
+/* ---------------------------------------------------------
+   ANIMATIONS
+   --------------------------------------------------------- */
+
+@keyframes twinPulse {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.012);
+  }
+}
+
+@keyframes signalMove {
+  0% {
+    transform: translateX(-18px) scale(0.5);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.9;
+  }
+
+  75% {
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: translateX(18px) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes feedbackFlow {
+  0% {
+    top: 0;
+    transform: translateX(-90px) scale(0.4);
+    opacity: 0;
+  }
+
+  12% {
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: translateX(90px) scale(1);
+    opacity: 1;
+  }
+
+  88% {
+    opacity: 0.8;
+  }
+
+  100% {
+    top: 100%;
+    transform: translateX(-90px) scale(0.4);
+    opacity: 0;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   REDUCED MOTION
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .system-node,
+  .system-node::before,
+  .system-signal span,
+  .feedback-particle {
+    animation: none;
+    transition: none;
+  }
+}
+
+.gap-section {
+  background: #eee9df;
+  color: #f7f8f9;
+}
+
+.gap-section .eyebrow {
+  color: #64706f;
+}
+
+.gap-section h2 span {
+  color: #315b63;
+}
+
+.gap-copy strong {
+  color: #315b63;
 }
 
 .participation-loop article {
