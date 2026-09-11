@@ -1630,7 +1630,46 @@ main {
   background: #eee9df;
   color: #171b1c;
 }
+.gap-section {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    isolation: isolate;
+    background: #08111c;
+}
 
+.gap-background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: auto;
+
+    max-width: 100%;
+    display: block;
+
+    z-index: -2;
+}
+
+.gap-background-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(4, 12, 20, 0.94) 0%,
+            rgba(4, 12, 20, 0.78) 45%,
+            rgba(4, 12, 20, 0.58) 100%
+        );
+}
+
+.gap-section .wrap {
+    position: relative;
+    z-index: 1;
+}
 .gap-section .eyebrow {
   color: #64706f;
 }

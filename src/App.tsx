@@ -4,6 +4,7 @@ import './App.css'
 import logo from './assets/keruvva-logo.png'
 import heroVideo from './assets/keruvva-hero.mp4'
 import heroPoster from './assets/keruvva-hero-poster.png'
+import participationGapImage from './assets/citypeople.jpg';
 
 const stages = [
   ['01', 'MAP', 'Represent physical environments digitally.'],
@@ -281,6 +282,15 @@ export default function App() {
   </div>
 </section>
 <section className="section gap-section" id="vision">
+  <img
+    className="gap-background-image"
+    src={participationGapImage}
+    alt=""
+    aria-hidden="true"
+  />
+
+  <div className="gap-background-overlay" aria-hidden="true" />
+
   <div className="wrap">
     <p className="eyebrow">02 / THE PARTICIPATION GAP</p>
 
