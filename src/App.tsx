@@ -1180,7 +1180,7 @@ export default function App() {
 
           <div className="founder-card-content">
             <p className="founder-role">
-              FOUNDER &amp; CEO
+              FOUNDER
             </p>
 
             <h3>
@@ -1222,7 +1222,7 @@ export default function App() {
 
           <div className="founder-card-content">
             <p className="founder-role">
-              CO-FOUNDER &amp; TECHNICAL LEAD
+              CO-FOUNDER 
             </p>
 
             <h3>
