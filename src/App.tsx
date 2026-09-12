@@ -5,6 +5,9 @@ import logo from './assets/keruvva-logo.png'
 import heroVideo from './assets/keruvva-hero.mp4'
 import heroPoster from './assets/keruvva-hero-poster.png'
 import participationGapImage from './assets/citypeople.jpg';
+import processImage from './assets/grabient-_gAAgMMgJtgAAgMi.png'
+import goodnessImage from './assets/goodness-ononogbu.jpg'
+import abosedeImage from './assets/grabient-_gBxgEXggGgArgDt.png'
 
 const stages = [
   ['01', 'MAP', 'Represent physical environments digitally.'],
@@ -14,12 +17,54 @@ const stages = [
   ['05', 'MEASURE', 'Turn participation into measurable outcomes.']
 ]
 const applications = [
-  ['01', 'URBAN DEVELOPMENT', 'Coordinate participation around physical development projects.', 'Connected planning and real-world activity.'],
-  ['02', 'INFRASTRUCTURE', 'Bring projects, places, evidence and stakeholders into one view.', 'Greater visibility across complex delivery.'],
-  ['03', 'SUSTAINABILITY', 'Make environmental action legible, participatory and measurable.', 'A clearer path from intent to impact.'],
-  ['04', 'GOVERNMENT', 'Create an operational layer for public initiatives and feedback.', 'More context around public action.'],
-  ['05', 'ENTERPRISE', 'Coordinate place-based programmes across distributed teams.', 'Shared intelligence for institutional work.'],
-  ['06', 'CAMPUSES & DISTRICTS', 'Connect the people, assets and projects that shape a place.', 'A more responsive operating environment.']
+  {
+    number: '01',
+    title: 'URBAN DEVELOPMENT',
+    description:
+      'Turn a development area into a living operating environment for planning, engagement and local activity.',
+    outcome:
+      'A shared layer connecting what is being built with how the surrounding place is experienced.'
+  },
+  {
+    number: '02',
+    title: 'INFRASTRUCTURE',
+    description:
+      'Give complex assets a contextual layer that connects physical conditions, interventions and stakeholders.',
+    outcome:
+      'Better coordination across long-lived infrastructure systems.'
+  },
+  {
+    number: '03',
+    title: 'CLIMATE & RESILIENCE',
+    description:
+      'Translate resilience programmes into location-aware actions that can be observed and evidenced.',
+    outcome:
+      'From broad climate targets to visible activity on the ground.'
+  },
+  {
+    number: '04',
+    title: 'PUBLIC PROGRAMMES',
+    description:
+      'Create a persistent digital environment around initiatives that require participation beyond a single transaction.',
+    outcome:
+      'A clearer connection between public objectives and community response.'
+  },
+  {
+    number: '05',
+    title: 'ENTERPRISE CAMPUSES',
+    description:
+      'Coordinate place-based operations, internal programmes and distributed activity across physical sites.',
+    outcome:
+      'A common operational context across people, places and programmes.'
+  },
+  {
+    number: '06',
+    title: 'DISTRICTS & DESTINATIONS',
+    description:
+      'Connect businesses, institutions, visitors and local initiatives around a shared environment.',
+    outcome:
+      'A more dynamic relationship between place, activity and opportunity.'
+  }
 ]
 const layers = [
   "BUILDINGS",
@@ -32,7 +77,20 @@ const layers = [
 function track(event: string) { window.dispatchEvent(new CustomEvent('keruvva:analytics', { detail: { event } })) }
 
 export default function App() {
-  const [menu, setMenu] = useState(false); const [modal, setModal] = useState(false); const [sent, setSent] = useState(false); const [duplicate, setDuplicate] = useState(false); const [submitting, setSubmitting] = useState(false); const [formError, setFormError] = useState(''); const [inviteCopied, setInviteCopied] = useState(false); const [layer, setLayer] = useState('PROJECT')
+  const [menu, setMenu] = useState(false); 
+  const [modal, setModal] = useState(false); 
+  const [sent, setSent] = useState(false); 
+  const [duplicate, setDuplicate] = useState(false); 
+  const [submitting, setSubmitting] = useState(false); 
+  const [formError, setFormError] = useState(''); 
+  const [inviteCopied, setInviteCopied] = useState(false); 
+  const [layer, setLayer] = useState('PROJECT')
+
+  const [activeApplication, setActiveApplication] =
+    useState('URBAN DEVELOPMENT')
+
+  const activeApplicationData =
+    applications.find(app => app.title === activeApplication) ?? applications[0]
   const openAccess = () => { track('early_access_started'); setModal(true); setSent(false); setDuplicate(false); setFormError(''); setInviteCopied(false); setMenu(false) }
   const scrollToSection = (event: MouseEvent<HTMLAnchorElement>, sectionId: string) => {
     event.preventDefault()
@@ -729,6 +787,16 @@ export default function App() {
   </div>
 </section> 
 <section className="section process">
+
+  <img
+    className="process-background-image"
+    src={processImage}
+    alt=""
+    aria-hidden="true"
+  />
+
+  <div className="process-background-overlay" aria-hidden="true" />
+
   <div className="wrap">
     <div className="section-intro split">
       <div>
@@ -811,25 +879,114 @@ export default function App() {
         </div>
       </div>
     </section>
-    <section className="section applications" id="applications">
-      <div className="wrap">
-        <p className="eyebrow">07 / POTENTIAL APPLICATIONS</p>
-        <div className="applications-head">
-          <h2>Designed for places<br />where <em>outcomes</em> matter.</h2>
-          <p>Keruvva's intended platform can support the coordination layer across complex physical environments. These are potential applications, not current customer claims.</p>
+   <section className="section applications" id="applications">
+  <div className="wrap">
+    <div className="applications-intro">
+      <div>
+        <p className="eyebrow">07 / APPLICATION SPACE</p>
+
+        <h2>
+          One platform.<br />
+          <em>Many environments.</em>
+        </h2>
+      </div>
+
+      <p>
+        Keruvva is designed to adapt to the environment, the actors involved
+        and the outcome being pursued — rather than forcing every problem
+        into the same workflow.
+      </p>
+    </div>
+
+    <div className="application-explorer">
+      <div className="application-nav">
+      {applications.map(app => (
+      <button
+    key={app.title}
+    type="button"
+    className={activeApplication === app.title ? 'active' : ''}
+    onClick={() => {
+      setActiveApplication(app.title)
+      track('application_selected')
+    }}
+  >
+    <span>{app.number}</span>
+    <strong>{app.title}</strong>
+    <i>↗</i>
+  </button>
+))}
+      </div>
+
+      <div className="application-stage">
+        <div className="application-stage-top">
+          <span>KERUVVA / SCENARIO</span>
+          <span>
+            <i className="pulse" />
+            ADAPTIVE MODEL
+          </span>
         </div>
-        <div className="application-grid">{applications.map(([n, title, problem, outcome]) => 
-          <article className="application" key={title} onClick={() => track('application_card_clicked')}>
-            <span>{n}</span>
-            <h3>{title}</h3>
-            <p>{problem}</p>
-            <small>Potential outcome</small>
-            <strong>{outcome}</strong>
-            <i>↗</i>
-          </article>)}
+
+        <div className="application-world">
+          <div className="world-grid" />
+
+          <div className="world-orbit orbit-one" />
+          <div className="world-orbit orbit-two" />
+
+          <div className="world-core">
+            <span>ACTIVE ENVIRONMENT</span>
+            <strong>{activeApplication}</strong>
+          </div>
+
+          <div className="world-node node-one">
+            <span>01</span>
+            <b>PLACE</b>
+          </div>
+
+          <div className="world-node node-two">
+            <span>02</span>
+            <b>ACTORS</b>
+          </div>
+
+          <div className="world-node node-three">
+            <span>03</span>
+            <b>OBJECTIVE</b>
+          </div>
+
+          <div className="world-node node-four">
+            <span>04</span>
+            <b>EVIDENCE</b>
+          </div>
+
+          <div className="world-line line-one" />
+          <div className="world-line line-two" />
+          <div className="world-line line-three" />
+          <div className="world-line line-four" />
+        </div>
+
+        <div className="application-description">
+          <div>
+            <small>SCENARIO</small>
+            <h3>{activeApplication}</h3>
+          </div>
+
+          <div>
+            <small>WHAT KERUVVA ENABLES</small>
+            <p>{activeApplicationData.description}</p>
+          </div>
+
+          <div>
+            <small>VALUE CREATED</small>
+            <strong>{activeApplicationData.outcome}</strong>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+
+    <p className="applications-footnote">
+      Illustrative future applications — not current customer claims.
+    </p>
+  </div>
+</section>
     <section className="section now">
       <div className="wrap">
         <div className="now-top">
@@ -847,26 +1004,124 @@ export default function App() {
         </div>
       </div>
     </section>
-    <section className="section business">
-      <div className="wrap">
-        <div className="business-head">
-          <p className="eyebrow">09 / BUSINESS MODEL</p>
-          <h2>Built for<br /><em>institutional value.</em></h2>
-          <p>Keruvva is intended to create value where coordination, visibility, participation and measurable outcomes matter.</p>
-        </div>
-        <div className="business-layers">{['INSTITUTIONAL PLATFORM', 'PROJECT / DEPLOYMENT LAYER', 'DATA & INTELLIGENCE', 'VERIFICATION', 'ECOSYSTEM SERVICES'].map((x, i) => 
-          <div key={x}>
-            <span>0{i + 1}</span>{x}<i>+</i>
-          </div>)}
-        </div>
-        <div className="customer-line">CITIES 
-          <span>·</span> INFRASTRUCTURE ORGANIZATIONS 
-          <span>·</span> DEVELOPERS 
-          <span>·</span> ENTERPRISES 
-          <span>·</span> UNIVERSITIES
-        </div>
+    <section className="section business" id="business">
+  <div className="wrap">
+
+    <div className="business-intro">
+      <div>
+        <p className="eyebrow">09 / VALUE ARCHITECTURE</p>
+
+        <h2>
+          The environment<br />
+          becomes the <em>business.</em>
+        </h2>
       </div>
-    </section>
+
+      <p>
+        Keruvva is designed around persistent environments rather than
+        one-off interactions. Institutions can deploy a digital layer,
+        activate programmes within it and expand the relationship as
+        participation, intelligence and use cases grow.
+      </p>
+    </div>
+
+    <div className="value-loop">
+
+      <div className="value-center">
+        <span>KERUVVA</span>
+        <strong>PARTICIPATION<br />INFRASTRUCTURE</strong>
+        <i />
+      </div>
+
+      <div className="value-orbit value-orbit-a">
+        <span>01</span>
+        <strong>DEPLOY</strong>
+        <small>Environment + platform</small>
+      </div>
+
+      <div className="value-orbit value-orbit-b">
+        <span>02</span>
+        <strong>ACTIVATE</strong>
+        <small>Programmes + use cases</small>
+      </div>
+
+      <div className="value-orbit value-orbit-c">
+        <span>03</span>
+        <strong>OBSERVE</strong>
+        <small>Activity + evidence</small>
+      </div>
+
+      <div className="value-orbit value-orbit-d">
+        <span>04</span>
+        <strong>INTELLIGENCE</strong>
+        <small>Insights + optimisation</small>
+      </div>
+
+      <div className="value-orbit value-orbit-e">
+        <span>05</span>
+        <strong>EXPAND</strong>
+        <small>More environments + services</small>
+      </div>
+
+    </div>
+
+    <div className="revenue-architecture">
+
+      <div className="revenue-intro">
+        <span>REVENUE ARCHITECTURE</span>
+        <p>
+          Multiple commercial layers can sit on the same underlying
+          environment as Keruvva expands.
+        </p>
+      </div>
+
+      <div className="revenue-streams">
+
+        <article>
+          <span>01</span>
+          <strong>PLATFORM</strong>
+          <p>Recurring access to Keruvva environments and core capabilities.</p>
+        </article>
+
+        <article>
+          <span>02</span>
+          <strong>DEPLOYMENT</strong>
+          <p>Environment creation, configuration and institutional integration.</p>
+        </article>
+
+        <article>
+          <span>03</span>
+          <strong>PROGRAMMES</strong>
+          <p>Commercial activation of projects, initiatives and participation campaigns.</p>
+        </article>
+
+        <article>
+          <span>04</span>
+          <strong>INTELLIGENCE</strong>
+          <p>Analytics, reporting and decision-support capabilities built on platform activity.</p>
+        </article>
+
+        <article>
+          <span>05</span>
+          <strong>ECOSYSTEM</strong>
+          <p>Future partner services, integrations and network-based opportunities.</p>
+        </article>
+
+      </div>
+    </div>
+
+    <div className="business-footer">
+      <span>ONE ENVIRONMENT</span>
+      <i>→</i>
+      <span>MULTIPLE PROGRAMMES</span>
+      <i>→</i>
+      <span>RECURRING VALUE</span>
+      <i>→</i>
+      <strong>EXPANDING NETWORK</strong>
+    </div>
+
+  </div>
+</section>
     <section className="section trust" id="about">
       <div className="wrap">
         <p className="eyebrow">10 / PRINCIPLES</p>
@@ -881,19 +1136,120 @@ export default function App() {
         </div>
       </div>
     </section>
-    <section className="section founder">
-      <div className="wrap founder-layout">
-        <div className="founder-mark">
-          <img src={logo} alt="Keruvva" />
-        </div>
-        <div>
-          <p className="eyebrow">11 / THE BUILDER</p>
-          <h2>Goodness<br /><em>Ononogbu</em></h2>
-          <p className="role">Founder, Keruvva</p>
-          <p className="founder-copy">Building at the intersection of AI, digital twins, urban innovation, sustainability and systems thinking.</p>
-        </div>
+    <section className="section founder" id="founders">
+  <div className="wrap">
+
+    <div className="founder-intro">
+      <div>
+        <p className="eyebrow">11 / THE FOUNDERS</p>
+
+        <h2>
+          Two builders.
+          <br />
+          One <em>system.</em>
+        </h2>
       </div>
-    </section>
+
+      <p>
+        Keruvva is being built by people interested in what happens when
+        technology moves beyond the screen and becomes part of the physical
+        world.
+      </p>
+    </div>
+
+    <div className="founder-grid">
+
+      {/* GOODNESS */}
+      <article className="founder-card">
+        <img
+          src={goodnessImage}
+          alt="Goodness Ononogbu"
+          className="founder-image"
+        />
+
+        <div className="founder-card-base">
+          <span>01 / FOUNDER</span>
+          <h3>Goodness<br /><em>Ononogbu</em></h3>
+        </div>
+
+        <div className="founder-card-reveal">
+          <div className="founder-card-top">
+            <span>01 / FOUNDER</span>
+            <span>KERUVVA</span>
+          </div>
+
+          <div className="founder-card-content">
+            <p className="founder-role">
+              FOUNDER &amp; CEO
+            </p>
+
+            <h3>
+              Goodness<br />
+              <em>Ononogbu</em>
+            </h3>
+
+            <p>
+              Building at the intersection of AI, digital twins,
+              spatial computing, sustainability and systems thinking —
+              with a focus on turning technology into infrastructure for
+              meaningful real-world participation.
+            </p>
+
+            <span className="founder-arrow">↗</span>
+          </div>
+        </div>
+      </article>
+
+
+      {/* ABOSEDE */}
+      <article className="founder-card">
+        <img
+          src={abosedeImage}
+          alt="Abosede-Brown Bankole"
+          className="founder-image"
+        />
+
+        <div className="founder-card-base">
+          <span>02 / CO-FOUNDER</span>
+          <h3>Abosede-Brown<br /><em>Bankole</em></h3>
+        </div>
+
+        <div className="founder-card-reveal">
+          <div className="founder-card-top">
+            <span>02 / CO-FOUNDER</span>
+            <span>KERUVVA</span>
+          </div>
+
+          <div className="founder-card-content">
+            <p className="founder-role">
+              CO-FOUNDER &amp; TECHNICAL LEAD
+            </p>
+
+            <h3>
+              Abosede-Brown<br />
+              <em>Bankole</em>
+            </h3>
+
+            <p>
+              Bringing cloud architecture and technical systems thinking
+              to the infrastructure behind Keruvva — helping translate
+              the platform vision into a scalable technical foundation.
+            </p>
+
+            <span className="founder-arrow">↗</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div className="founder-footer">
+      <span>AI × SPATIAL COMPUTING × PARTICIPATION × REAL-WORLD SYSTEMS</span>
+      <span>BUILDING KERUVVA</span>
+    </div>
+
+  </div>
+</section>
     <section className="section early-access" id="early-access">
       <div className="wrap">
         <p className="eyebrow">12 / EARLY ACCESS</p>
