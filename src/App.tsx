@@ -117,12 +117,12 @@ export default function App() {
         <source src={heroVideo} type="video/mp4" />
       </video>
       <nav className="nav" aria-label="Main navigation">
-        <a className="wordmark" href="#top" onClick={event => scrollToSection(event, 'top')}>
+        <a className="wordmark" href="top" onClick={event => scrollToSection(event, 'top')}>
           <img src={logo} alt="Keruvva" />
         </a>
       <button className="menu-toggle" type="button" aria-expanded={menu} onClick={() => setMenu(!menu)}>{menu ? 'CLOSE ×' : 'MENU ＋'}</button>
       <div className={`nav-links ${menu ? 'open' : ''}`}>
-        <a href="#platform" onClick={event => scrollToSection(event, 'platform')}>Platform</a><a href="#technology" onClick={event => scrollToSection(event, 'technology')}>Technology</a><a href="#applications" onClick={event => scrollToSection(event, 'applications')}>Applications</a><a href="#vision" onClick={event => scrollToSection(event, 'vision')}>Vision</a><a href="#about" onClick={event => scrollToSection(event, 'about')}>About</a><button className="nav-cta" type="button" onClick={openAccess}>Get early access ↗</button></div></nav>
+        <a href="platform" onClick={event => scrollToSection(event, 'platform')}>Platform</a><a href="technology" onClick={event => scrollToSection(event, 'technology')}>Technology</a><a href="applications" onClick={event => scrollToSection(event, 'applications')}>Applications</a><a href="vision" onClick={event => scrollToSection(event, 'vision')}>Vision</a><a href="about" onClick={event => scrollToSection(event, 'about')}>About</a><button className="nav-cta" type="button" onClick={openAccess}>Get early access ↗</button></div></nav>
     </section>
   <section className="hero-copy">
   <div className="wrap hero-copy-layout">
@@ -1260,15 +1260,114 @@ export default function App() {
         </div>
       </div>
     </section>
-    <footer className="site-footer">
-      <div className="wrap footer-content">
-        <a className="footer-brand" href="#top" onClick={event => scrollToSection(event, 'top')}>
-          <img src={logo} alt="Keruvva" />
-        </a>
-        <p>BUILD YOUR WORLD!</p>
-        <small>KERUVVA © 2026</small>
-      </div>
-    </footer>
+   <footer className="site-footer">
+  <div className="wrap">
+
+```
+<div className="footer-main">
+
+  {/* BRAND */}
+  <div className="footer-brand-block">
+    <a
+      className="footer-brand"
+      href="#top"
+      onClick={event => scrollToSection(event, 'top')}
+      aria-label="Keruvva — back to top"
+    >
+      <img src={logo} alt="Keruvva" />
+    </a>
+
+    <p className="footer-statement">
+      BUILD YOUR WORLD.
+      <br />
+      <span>PARTICIPATE IN WHAT COMES NEXT.</span>
+    </p>
+
+    <p className="footer-description">
+      Keruvva is building the digital layer between physical places,
+      intelligent systems and real-world participation.
+    </p>
+  </div>
+
+  {/* NAVIGATION */}
+  <div className="footer-column">
+    <span className="footer-label">EXPLORE</span>
+
+    <nav className="footer-nav" aria-label="Footer navigation">
+      <a href="platform" onClick={event => scrollToSection(event, 'platform')}>
+        Platform
+      </a>
+
+      <a href="technology" onClick={event => scrollToSection(event, 'technology')}>
+        Digital Twin
+      </a>
+
+      <a href="applications" onClick={event => scrollToSection(event, 'applications')}>
+        Applications
+      </a>
+
+      <a href="vision" onClick={event => scrollToSection(event, 'vision')}>
+        Vision
+      </a>
+
+      <a href="about" onClick={event => scrollToSection(event, 'about')}>
+        Principles
+      </a>
+
+      <a href="early-access" onClick={event => scrollToSection(event, 'early-access')}>
+        Early Access
+      </a>
+    </nav>
+  </div>
+
+  {/* CONTACT */}
+  <div className="footer-column footer-contact">
+    <span className="footer-label">ENQUIRIES</span>
+
+    <a
+      className="footer-email"
+      href="mailto:hello@keruvva.com"
+    >
+      hello@keruvva.com
+      <span>↗</span>
+    </a>
+
+    <span className="footer-label footer-location-label">
+      LOCATION
+    </span>
+
+    <p className="footer-location">
+      Calgary, Alberta
+      <br />
+      <span>Canada</span>
+    </p>
+
+    <small className="footer-status">
+      PREPARING FOR CANADIAN INCORPORATION
+    </small>
+  </div>
+
+</div>
+
+{/* LOWER BAR */}
+<div className="footer-bottom">
+
+  <div className="footer-bottom-left">
+    <span>KERUVVA © 2026</span>
+    <span className="footer-dot">·</span>
+    <span>AI · DIGITAL TWINS · PARTICIPATION</span>
+  </div>
+
+  <div className="footer-bottom-right">
+    <span>CALGARY / AB</span>
+    <span className="footer-dot">·</span>
+    <span>BUILD YOUR WORLD</span>
+  </div>
+
+</div>
+```
+  </div>
+</footer>
     {modal && (
       <div className="modal-backdrop" onMouseDown={e => e.target === e.currentTarget && setModal(false)}>
         <div className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
