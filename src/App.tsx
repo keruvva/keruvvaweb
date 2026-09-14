@@ -1158,50 +1158,60 @@ export default function App() {
     </div>
 
     <div className="founder-grid">
+{/* GOODNESS */}
+<article className="founder-card">
+  <img
+    src={goodnessImage}
+    alt="Goodness Ononogbu"
+    className="founder-image"
+  />
 
-      {/* GOODNESS */}
-      <article className="founder-card">
-        <img
-          src={goodnessImage}
-          alt="Goodness Ononogbu"
-          className="founder-image"
-        />
+  <div className="founder-card-base">
+    <span>01 / FOUNDER</span>
+    <h3>
+      Goodness<br />
+      <em>Ononogbu</em>
+    </h3>
+  </div>
 
-        <div className="founder-card-base">
-          <span>01 / FOUNDER</span>
-          <h3>Goodness<br /><em>Ononogbu</em></h3>
-        </div>
+  <div className="founder-card-reveal">
+    <div className="founder-card-top">
+      <span>01 / FOUNDER</span>
+      <span>KERUVVA</span>
+    </div>
 
-        <div className="founder-card-reveal">
-          <div className="founder-card-top">
-            <span>01 / FOUNDER</span>
-            <span>KERUVVA</span>
-          </div>
+    <div className="founder-card-content">
+      <p className="founder-role">
+        FOUNDER
+      </p>
 
-          <div className="founder-card-content">
-            <p className="founder-role">
-              FOUNDER
-            </p>
+      <h3>
+        Goodness<br />
+        <em>Ononogbu</em>
+      </h3>
 
-            <h3>
-              Goodness<br />
-              <em>Ononogbu</em>
-            </h3>
+      <p>
+        Building at the intersection of AI, digital twins,
+        spatial computing, sustainability and systems thinking —
+        with a focus on turning technology into infrastructure for
+        meaningful real-world participation.
+      </p>
 
-            <p>
-              Building at the intersection of AI, digital twins,
-              spatial computing, sustainability and systems thinking —
-              with a focus on turning technology into infrastructure for
-              meaningful real-world participation.
-            </p>
-
-            <span className="founder-arrow">↗</span>
-          </div>
-        </div>
-      </article>
-
-
-      {/* ABOSEDE */}
+      <a
+        href="https://www.linkedin.com/in/goodness-ononogbu/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="founder-linkedin"
+        aria-label="View Goodness Ononogbu on LinkedIn"
+        onClick={() => track('founder_linkedin_clicked')}
+      >
+        <span>VIEW LINKEDIN</span>
+        <span className="founder-linkedin-icon">↗</span>
+      </a>
+    </div>
+  </div>
+</article>
+{/* ABOSEDE */}
       <article className="founder-card">
         <img
           src={abosedeImage}
@@ -1324,13 +1334,30 @@ export default function App() {
   <div className="footer-column footer-contact">
     <span className="footer-label">ENQUIRIES</span>
 
-    <a
-      className="footer-email"
-      href="mailto:hello@keruvva.com"
+  <div className="footer-contact-row">
+  <a
+    href="mailto:hello@keruvva.com"
+    className="footer-email"
+  >
+    hello@keruvva.com
+  </a>
+
+  <a
+    href="https://www.linkedin.com/company/keruvva"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="footer-linkedin"
+    aria-label="Keruvva on LinkedIn"
+  >
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className="footer-linkedin-icon"
     >
-      hello@keruvva.com
-      <span>↗</span>
-    </a>
+      <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.95v5.66H9.34V8.99h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.48v6.27ZM5.32 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM3.54 20.45H7.1V8.99H3.54v11.46Z" />
+    </svg>
+  </a>
+</div>
 
     <span className="footer-label footer-location-label">
       LOCATION
